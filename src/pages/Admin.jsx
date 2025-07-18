@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { teamAPI, projectsAPI, contactAPI, authAPI, handleApiError } from '../services/api';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 // مكونات الإدارة (سيتم إنشاؤها لاحقًا)
-// import TeamAdmin from '../components/admin/TeamAdmin';
-// import ProjectsAdmin from '../components/admin/ProjectsAdmin';
-// import ContactAdmin from '../components/admin/ContactAdmin';
+import TeamAdmin from '../components/admin/TeamAdmin';
+import ProjectsAdmin from '../components/admin/ProjectsAdmin';
+import ContactAdmin from '../components/admin/ContactAdmin';
 
 const Admin = () => {
   const { t, i18n } = useTranslation();
@@ -217,22 +217,19 @@ const Admin = () => {
         {/* Team Management */}
         {activeTab === 'team' && (
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow">
-            {/* <TeamAdmin /> */}
-            <p className="text-gray-600 dark:text-gray-400 text-center">{t('admin.team_coming_soon')}</p>
+            <TeamAdmin />
           </div>
         )}
         {/* Projects Management */}
         {activeTab === 'projects' && (
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow">
-            {/* <ProjectsAdmin /> */}
-            <p className="text-gray-600 dark:text-gray-400 text-center">{t('admin.projects_coming_soon')}</p>
+            <ProjectsAdmin />
           </div>
         )}
         {/* Contacts Management */}
         {activeTab === 'contacts' && (
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow">
-            {/* <ContactAdmin /> */}
-            <p className="text-gray-600 dark:text-gray-400 text-center">{t('admin.contacts_coming_soon')}</p>
+            <ContactAdmin />
           </div>
         )}
         {loading && (
