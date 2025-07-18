@@ -129,4 +129,4 @@ teamMemberSchema.statics.getActiveMembers = function() {
   return this.find({ isActive: true }).sort({ order: 1 });
 };
 
-export default mongoose.model('TeamMember', teamMemberSchema);
+module.exports = mongoose.model('TeamMember', teamMemberSchema);

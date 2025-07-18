@@ -75,4 +75,4 @@ router.post('/:id/notes', noteValidation, addContactNote);
 router.put('/:id/spam', markAsSpam);
 router.delete('/:id', deleteContactMessage);
 
-export default router;
+module.exports = router;

@@ -172,4 +172,4 @@ contactSchema.statics.detectSpam = function(message, email) {
   return hasSpamKeywords || hasSuspiciousPattern;
 };
 
-export default mongoose.model('Contact', contactSchema);
+module.exports = mongoose.model('Contact', contactSchema);
