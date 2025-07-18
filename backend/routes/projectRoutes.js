@@ -106,4 +106,4 @@ router.put('/:id/order', orderValidation, updateProjectOrder);
 router.put('/:id/restore', restoreProject);
 router.get('/admin/stats', getProjectStats);
 
-export default router;
+module.exports = router;

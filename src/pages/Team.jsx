@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { teamAPI, handleApiError } from '../services/api';
-import { LoadingSpinner } from '../components/UI/LoadingSpinner';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const Team = () => {
   const { t } = useTranslation();

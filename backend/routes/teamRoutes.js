@@ -92,4 +92,4 @@ router.put('/:id/order', orderValidation, updateTeamMemberOrder);
 router.put('/:id/reactivate', reactivateTeamMember);
 router.get('/admin/stats', getTeamStats);
 
-export default router;
+module.exports = router;

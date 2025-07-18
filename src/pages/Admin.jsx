@@ -12,7 +12,7 @@ import {
   TrashIcon
 } from '@heroicons/react/24/outline';
 import { teamAPI, projectsAPI, contactAPI, authAPI, handleApiError } from '../services/api';
-import { LoadingSpinner } from '../components/UI/LoadingSpinner';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 import toast from 'react-hot-toast';
 
 const Admin = () => {
