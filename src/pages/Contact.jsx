@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { contactAPI, handleApiError } from '../services/api';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -28,13 +29,13 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Send data to backend
+      const response = await contactAPI.submit({
+        ...formData,
+        category: 'general' // Default category
+      });
       
-      // In real app, send data to backend
-      console.log('Form data:', formData);
-      
-      toast.success(t('contact.form.success'));
+      toast.success(response.data.message || t('contact.form.success'));
       setFormData({
         name: '',
         email: '',
@@ -43,7 +44,8 @@ const Contact = () => {
         message: '',
       });
     } catch (error) {
-      toast.error(t('contact.form.error'));
+      const errorInfo = handleApiError(error);
+      toast.error(errorInfo.message || t('contact.form.error'));
     } finally {
       setIsSubmitting(false);
     }

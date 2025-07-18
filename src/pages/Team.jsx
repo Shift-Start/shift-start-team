@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { teamAPI, handleApiError } from '../services/api';
+import { LoadingSpinner } from '../components/UI/LoadingSpinner';
 
 const Team = () => {
   const { t } = useTranslation();
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Sample team data - in real app this would come from backend
-  const teamMembers = [
+  // Fetch team members from API
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        setLoading(true);
+        const response = await teamAPI.getAll();
+        setTeamMembers(response.data.data || []);
+        setError(null);
+      } catch (err) {
+        const errorInfo = handleApiError(err);
+        setError(errorInfo.message);
+        // Fallback to sample data if API fails
+        setTeamMembers([
     {
       id: 1,
       name: 'أحمد محمد',
