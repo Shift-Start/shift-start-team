@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "team": "Team",
+    "projects": "Projects",
+    "contact": "Contact",
+    "services": "Services"
+  },
+  "hero": {
+    "title": "A Shift in Development",
+    "subtitle": "Shift Start team specialized in web development and design using cutting-edge technologies",
+    "description": "We are a passionate technology team, providing innovative solutions and attractive designs that meet our clients' needs and achieve their digital goals",
+    "cta": "Contact Us",
+    "learnMore": "Learn More"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Professional team specialized in development",
+    "description": "We are Shift Start team, a group of creative developers and designers who strive to provide the best technical solutions. We believe that every project is a new beginning and an opportunity for creativity and excellence.",
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the first choice for companies and individuals seeking excellence in the digital world"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "We provide innovative technical solutions and modern designs that help our clients achieve their goals and build a strong presence on the internet"
+    },
+    "values": {
+      "title": "Our Values",
+      "quality": "Quality",
+      "innovation": "Innovation", 
+      "excellence": "Excellence",
+      "commitment": "Commitment"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We provide a comprehensive range of technical services",
+    "webDevelopment": {
+      "title": "Web Development",
+      "description": "Developing modern and responsive websites using the latest technologies"
+    },
+    "webDesign": {
+      "title": "Web Design",
+      "description": "Attractive and modern designs that reflect your brand identity"
+    },
+    "mobileApps": {
+      "title": "Mobile Apps",
+      "description": "Mobile application development for iOS and Android systems"
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "description": "Integrated e-commerce platforms to grow your business"
+    },
+    "seo": {
+      "title": "SEO",
+      "description": "Optimize your site to top Google search results"
+    },
+    "maintenance": {
+      "title": "Maintenance & Support",
+      "description": "Continuous maintenance and technical support services for your websites and applications"
+    }
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Meet our outstanding team members",
+    "roles": {
+      "developer": "Developer",
+      "designer": "Designer",
+      "manager": "Project Manager",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "fullstack": "Full Stack Developer",
+      "ui": "UI Designer",
+      "ux": "UX Designer"
+    }
+  },
+  "projects": {
+    "title": "Our Projects",
+    "subtitle": "Work we're proud of",
+    "viewProject": "View Project",
+    "visitSite": "Visit Site",
+    "categories": {
+      "all": "All",
+      "website": "Websites",
+      "mobile": "Mobile Apps",
+      "ecommerce": "E-commerce",
+      "corporate": "Corporate"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a project? Let us help you achieve it",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Your message has been sent successfully!",
+      "error": "An error occurred while sending the message"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours"
+    }
+  },
+  "footer": {
+    "description": "Shift Start team - A shift in the world of development and design",
+    "quickLinks": "Quick Links",
+    "services": "Our Services",
+    "contact": "Contact Information",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "language": "Language"
+  },
+  "seo": {
+    "home": {
+      "title": "Shift Start | Web Development Team",
+      "description": "Shift Start team for web development and design. We provide design and development services with high professionalism."
+    },
+    "about": {
+      "title": "About Us - Shift Start",
+      "description": "Learn about Shift Start team, a group of creative developers and designers specialized in web development."
+    },
+    "team": {
+      "title": "Our Team - Shift Start",
+      "description": "Meet the outstanding members of Shift Start team of experienced and highly skilled developers and designers."
+    },
+    "projects": {
+      "title": "Our Projects - Shift Start",
+      "description": "Browse a collection of the best projects by Shift Start team in web development and application design."
+    },
+    "contact": {
+      "title": "Contact Us - Shift Start",
+      "description": "Contact Shift Start team to discuss your next project in web development and design."
+    }
+  }
+}
