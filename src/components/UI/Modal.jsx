@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ isOpen, onClose, title, children }) => {
+const Modal = ({ isOpen, onClose, title, children, footer }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -13,6 +13,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         </button>
         {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
         {children}
+        {footer && <div className="mt-6">{footer}</div>}
       </div>
     </div>
   );
