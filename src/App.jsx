@@ -12,6 +12,7 @@ const Services = React.lazy(() => import('./pages/Services'));
 const Team = React.lazy(() => import('./pages/Team'));
 const Projects = React.lazy(() => import('./pages/Projects'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const Admin = React.lazy(() => import('./pages/Admin'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

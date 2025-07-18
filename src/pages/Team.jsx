@@ -111,7 +111,14 @@ const Team = () => {
         behance: 'https://behance.com',
       }
     },
-  ];
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
 
   const getRoleColor = (role) => {
     const colors = {
@@ -155,6 +162,11 @@ const Team = () => {
     };
     return icons[platform] || null;
   };
+
+  // Show loading spinner while fetching data
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
@@ -204,7 +216,7 @@ const Team = () => {
                       <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:scale-105 transition-transform duration-300">
                         <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
                           <span className="text-4xl font-bold text-gray-600 dark:text-gray-300">
-                            {member.name.charAt(0)}
+                            {(member.name?.ar || member.name || member.nameEn)?.charAt(0)}
                           </span>
                         </div>
                       </div>
@@ -217,12 +229,12 @@ const Team = () => {
 
                     {/* Name */}
                     <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                      {member.name}
+                      {member.name?.ar || member.name || member.nameEn}
                     </h3>
 
                     {/* Bio */}
                     <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                      {member.bio}
+                      {member.bio?.ar || member.bio || member.bioEn}
                     </p>
 
                     {/* Skills */}

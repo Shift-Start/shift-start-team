@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { projectsAPI, handleApiError } from '../services/api';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -11,6 +12,22 @@ const Home = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+
+  // Fetch featured projects
+  useEffect(() => {
+    const fetchFeaturedProjects = async () => {
+      try {
+        const response = await projectsAPI.getFeatured();
+        setFeaturedProjects(response.data.data.slice(0, 3)); // Show only 3 projects
+      } catch (error) {
+        console.error('Error fetching featured projects:', error);
+      }
+    };
+
+    fetchFeaturedProjects();
+  }, []);
 
   // Animation variants
   const fadeInUp = {

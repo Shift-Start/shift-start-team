@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { projectsAPI, handleApiError } from '../services/api';
+import { LoadingSpinner } from '../components/UI/LoadingSpinner';
 
 const Projects = () => {
   const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Sample projects data - in real app this would come from backend
-  const projects = [
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await projectsAPI.getAll();
+        setProjects(response.data.data || []);
+        setError(null);
+      } catch (err) {
+        const errorInfo = handleApiError(err);
+        setError(errorInfo.message);
+        // Fallback to sample data if API fails
+        setProjects([
     {
       id: 1,
       title: 'متجر إلكتروني متكامل',
@@ -82,7 +98,14 @@ const Projects = () => {
       url: 'https://example.com',
       featured: false,
     },
-  ];
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const categories = [
     { key: 'all', icon: '🌐' },
@@ -95,6 +118,11 @@ const Projects = () => {
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.category === activeFilter);
+
+  // Show loading spinner while fetching data
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   const getTechColor = (tech) => {
     const colors = {
@@ -227,11 +255,11 @@ const Projects = () => {
                   {/* Project Info */}
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                      {project.title}
+                      {project.title?.ar || project.title || project.titleEn}
                     </h3>
                     
                     <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                      {project.description}
+                      {project.description?.ar || project.description || project.descriptionEn}
                     </p>
 
                     {/* Technologies */}
@@ -248,9 +276,9 @@ const Projects = () => {
 
                     {/* Action Buttons */}
                     <div className="flex space-x-3 rtl:space-x-reverse">
-                      {project.url && (
+                      {(project.links?.live || project.url) && (
                         <a
-                          href={project.url}
+                          href={project.links?.live || project.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex-1 bg-brand-gradient text-white py-2 px-4 rounded-lg text-center text-sm font-medium hover:shadow-lg transition-all duration-300"
