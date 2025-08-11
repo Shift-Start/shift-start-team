@@ -20,7 +20,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
-      features: ['React & Vue.js', 'Node.js & Express', 'MongoDB & PostgreSQL', 'REST APIs'],
+      featuresKeys: [
+        'services.webDevelopment.features.0',
+        'services.webDevelopment.features.1',
+        'services.webDevelopment.features.2',
+        'services.webDevelopment.features.3',
+      ],
       color: 'from-blue-500 to-cyan-500',
     },
     {
@@ -30,7 +35,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
         </svg>
       ),
-      features: ['UI/UX Design', 'Responsive Design', 'Brand Identity', 'Prototyping'],
+      featuresKeys: [
+        'services.webDesign.features.0',
+        'services.webDesign.features.1',
+        'services.webDesign.features.2',
+        'services.webDesign.features.3',
+      ],
       color: 'from-purple-500 to-pink-500',
     },
     {
@@ -40,7 +50,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
         </svg>
       ),
-      features: ['React Native', 'Flutter', 'iOS & Android', 'Cross-platform'],
+      featuresKeys: [
+        'services.mobileApps.features.0',
+        'services.mobileApps.features.1',
+        'services.mobileApps.features.2',
+        'services.mobileApps.features.3',
+      ],
       color: 'from-green-500 to-emerald-500',
     },
     {
@@ -50,7 +65,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
         </svg>
       ),
-      features: ['Shopify', 'WooCommerce', 'Payment Integration', 'Inventory Management'],
+      featuresKeys: [
+        'services.ecommerce.features.0',
+        'services.ecommerce.features.1',
+        'services.ecommerce.features.2',
+        'services.ecommerce.features.3',
+      ],
       color: 'from-orange-500 to-red-500',
     },
     {
@@ -60,7 +80,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       ),
-      features: ['Keyword Research', 'On-page SEO', 'Technical SEO', 'Analytics'],
+      featuresKeys: [
+        'services.seo.features.0',
+        'services.seo.features.1',
+        'services.seo.features.2',
+        'services.seo.features.3',
+      ],
       color: 'from-yellow-500 to-orange-500',
     },
     {
@@ -71,7 +96,12 @@ const Services = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
-      features: ['Bug Fixes', 'Updates', '24/7 Support', 'Performance Optimization'],
+      featuresKeys: [
+        'services.maintenance.features.0',
+        'services.maintenance.features.1',
+        'services.maintenance.features.2',
+        'services.maintenance.features.3',
+      ],
       color: 'from-indigo-500 to-purple-500',
     },
   ];
@@ -79,47 +109,62 @@ const Services = () => {
   const process = [
     {
       step: '01',
-      title: 'اكتشاف',
-      description: 'نحلل متطلباتك ونفهم أهدافك',
+      titleKey: 'services.process.steps.0.title',
+      descriptionKey: 'services.process.steps.0.description',
       icon: '🔍',
     },
     {
       step: '02',
-      title: 'تخطيط',
-      description: 'نضع استراتيجية شاملة للمشروع',
+      titleKey: 'services.process.steps.1.title',
+      descriptionKey: 'services.process.steps.1.description',
       icon: '📋',
     },
     {
       step: '03',
-      title: 'تصميم',
-      description: 'نصمم واجهات جذابة وسهلة الاستخدام',
+      titleKey: 'services.process.steps.2.title',
+      descriptionKey: 'services.process.steps.2.description',
       icon: '🎨',
     },
     {
       step: '04',
-      title: 'تطوير',
-      description: 'نبني الحل التقني باستخدام أفضل الممارسات',
+      titleKey: 'services.process.steps.3.title',
+      descriptionKey: 'services.process.steps.3.description',
       icon: '⚡',
     },
     {
       step: '05',
-      title: 'اختبار',
-      description: 'نختبر الجودة والأداء بعناية',
+      titleKey: 'services.process.steps.4.title',
+      descriptionKey: 'services.process.steps.4.description',
       icon: '🧪',
     },
     {
       step: '06',
-      title: 'إطلاق',
-      description: 'نطلق المشروع مع الدعم المستمر',
+      titleKey: 'services.process.steps.5.title',
+      descriptionKey: 'services.process.steps.5.description',
       icon: '🚀',
     },
+  ];
+
+  const technologies = [
+    'services.technologies.react',
+    'services.technologies.vue',
+    'services.technologies.node',
+    'services.technologies.python',
+    'services.technologies.mongodb',
+    'services.technologies.postgresql',
+    'services.technologies.docker',
+    'services.technologies.aws',
+    'services.technologies.figma',
+    'services.technologies.tailwind',
+    'services.technologies.typescript',
+    'services.technologies.nextjs',
   ];
 
   return (
     <>
       <Helmet>
-        <title>خدماتنا - Shift Start</title>
-        <meta name="description" content="اكتشف مجموعة شاملة من خدمات التطوير والتصميم التي نقدمها في Shift Start" />
+        <title>{t('services.seo.title')}</title>
+        <meta name="description" content={t('services.seo.description')} />
       </Helmet>
 
       {/* Hero Section */}
@@ -171,10 +216,10 @@ const Services = () => {
                     </p>
                     
                     <div className="space-y-2">
-                      {service.features.map((feature, idx) => (
+                      {service.featuresKeys.map((featureKey, idx) => (
                         <div key={idx} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                           <div className="w-2 h-2 bg-brand-red rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
-                          {feature}
+                          {t(featureKey)}
                         </div>
                       ))}
                     </div>
@@ -196,10 +241,10 @@ const Services = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-              كيف نعمل
+              {t('services.process.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              نتبع منهجية مدروسة لضمان نجاح مشروعك
+              {t('services.process.subtitle')}
             </p>
           </motion.div>
 
@@ -216,10 +261,10 @@ const Services = () => {
                   <div className="text-4xl mb-4">{step.icon}</div>
                   <div className="text-sm font-bold text-brand-red mb-2">{step.step}</div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                    {step.title}
+                    {t(step.titleKey)}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    {step.description}
+                    {t(step.descriptionKey)}
                   </p>
                 </div>
                 
@@ -243,27 +288,24 @@ const Services = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-              التقنيات التي نستخدمها
+              {t('services.technologies.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              نعمل بأحدث التقنيات والأدوات لضمان جودة عالية
+              {t('services.technologies.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {[
-              'React', 'Vue.js', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL',
-              'Docker', 'AWS', 'Figma', 'TailwindCSS', 'TypeScript', 'Next.js'
-            ].map((tech, index) => (
+            {technologies.map((techKey, index) => (
               <motion.div
-                key={tech}
+                key={techKey}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="card p-4 text-center hover-lift"
               >
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {tech}
+                  {t(techKey)}
                 </div>
               </motion.div>
             ))}
@@ -281,23 +323,23 @@ const Services = () => {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              مستعد لبدء مشروعك؟
+              {t('services.cta.title')}
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              تواصل معنا اليوم واحصل على استشارة مجانية حول مشروعك
+              {t('services.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
                 className="bg-white text-brand-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
               >
-                ابدأ مشروعك الآن
+                {t('services.cta.startProject')}
               </Link>
               <Link
                 to="/projects"
                 className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-red transition-all duration-300 inline-block"
               >
-                شاهد أعمالنا
+                {t('services.cta.viewProjects')}
               </Link>
             </div>
           </motion.div>

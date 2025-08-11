@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'; // إضافة هذا السطر
 import { useApp } from '../../contexts/AppContext';
 
 const Header = () => {
@@ -9,7 +10,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect
+  // تأثير عند التمرير
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -18,7 +19,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navigation items
+  // عناصر القائمة
   const navItems = [
     { key: 'home', path: '/' },
     { key: 'about', path: '/about' },
@@ -35,6 +36,7 @@ const Header = () => {
   const toggleLanguage = () => {
     const newLang = language === 'ar' ? 'en' : 'ar';
     setLanguage(newLang);
+    i18n.changeLanguage(newLang); // الترجمة تتغير الآن فورًا
   };
 
   return (
@@ -47,7 +49,7 @@ const Header = () => {
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+          {/* الشعار */}
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">S</span>
@@ -55,12 +57,12 @@ const Header = () => {
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold gradient-text">Shift Start</h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {language === 'ar' ? 'نقطة تحول' : 'نقطة تحول'}
+                {language === 'ar' ? 'نقطة تحول' : 'Turning Point'}
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* قائمة سطح المكتب */}
           <div className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
             {navItems.map((item) => (
               <Link
@@ -75,9 +77,9 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Actions */}
+          {/* الأزرار */}
           <div className="flex items-center space-x-4 rtl:space-x-reverse">
-            {/* Language Toggle */}
+            {/* زر اللغة */}
             <button
               onClick={toggleLanguage}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -88,7 +90,7 @@ const Header = () => {
               </span>
             </button>
 
-            {/* Theme Toggle */}
+            {/* زر الوضع الليلي */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -109,7 +111,7 @@ const Header = () => {
               )}
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* زر القائمة للموبايل */}
             <button
               onClick={toggleSidebar}
               className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -136,7 +138,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* قائمة الموبايل */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ${
             sidebarOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'

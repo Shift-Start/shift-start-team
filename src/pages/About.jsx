@@ -98,14 +98,13 @@ const About = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                قصتنا
+                {t('about.storyTitle', 'قصتنا')}
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                 {t('about.description')}
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                نحن فريق من المبدعين والمطورين الذين يجمعهم شغف واحد: تقديم أفضل الحلول التقنية. 
-                نؤمن بقوة التكنولوجيا في تغيير الأعمال وتحسين حياة الناس.
+                {t('about.additionalText')}
               </p>
             </motion.div>
 
@@ -117,8 +116,7 @@ const About = () => {
             >
               <div className="w-full h-80 bg-brand-gradient rounded-2xl flex items-center justify-center">
                 <div className="text-white text-center">
-                  <div className="text-6xl font-bold mb-4">5+</div>
-                  <div className="text-xl">سنوات من الخبرة</div>
+                  <div className="text-6xl font-bold mb-4">{t('about.yearsExperience')}</div>
                 </div>
               </div>
               <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-orange/20 rounded-full blur-xl"></div>
@@ -188,7 +186,7 @@ const About = () => {
               {t('about.values.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              القيم التي نؤمن بها وتوجه عملنا اليومي
+              {t('about.values.description', 'القيم التي نؤمن بها وتوجه عملنا اليومي')}
             </p>
           </motion.div>
 
@@ -224,7 +222,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-              لماذا تختارنا؟
+              {t('about.whyChooseUsTitle')}
             </h2>
           </motion.div>
 
@@ -237,10 +235,10 @@ const About = () => {
             >
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                سرعة في التنفيذ
+                {t('about.speed')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                نلتزم بالمواعيد المحددة ونسلم مشاريعك في الوقت المناسب
+                {t('about.speedDesc')}
               </p>
             </motion.div>
 
@@ -252,10 +250,10 @@ const About = () => {
             >
               <div className="text-4xl mb-4">💡</div>
               <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                حلول مبتكرة
+                {t('about.innovationTitle')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                نقدم أفكار إبداعية وحلول تقنية متقدمة تميز مشروعك
+                {t('about.innovationDesc')}
               </p>
             </motion.div>
 
@@ -267,10 +265,10 @@ const About = () => {
             >
               <div className="text-4xl mb-4">🤝</div>
               <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                شراكة طويلة الأمد
+                {t('about.partnershipTitle')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                نؤمن بالعلاقات طويلة الأمد ونقدم الدعم المستمر
+                {t('about.partnershipDesc')}
               </p>
             </motion.div>
           </div>

@@ -6,13 +6,14 @@ import { projectsAPI, handleApiError } from '../services/api';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const Projects = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch projects from API
+  const lang = i18n.language;
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -23,81 +24,105 @@ const Projects = () => {
       } catch (err) {
         const errorInfo = handleApiError(err);
         setError(errorInfo.message);
-        // Fallback to sample data if API fails
+        // بيانات افتراضية في حال خطأ API
         setProjects([
     {
-      id: 1,
-      title: 'متجر إلكتروني متكامل',
-      titleEn: 'Complete E-commerce Store',
-      description: 'منصة تجارة إلكترونية شاملة مع نظام دفع متقدم وإدارة المخزون',
-      descriptionEn: 'Comprehensive e-commerce platform with advanced payment system and inventory management',
-      image: '/api/placeholder/600/400',
-      category: 'ecommerce',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      url: 'https://example.com',
-      github: 'https://github.com/example',
-      featured: true,
+    id: 1,
+    title: {
+      ar: 'متجر إلكتروني متكامل',
+      en: 'Complete E-commerce Store',
     },
-    {
-      id: 2,
-      title: 'تطبيق إدارة المهام',
-      titleEn: 'Task Management App',
-      description: 'تطبيق موبايل لإدارة المهام والمشاريع مع ميزات التعاون الجماعي',
-      descriptionEn: 'Mobile app for task and project management with team collaboration features',
-      image: '/api/placeholder/600/400',
-      category: 'mobile',
-      technologies: ['React Native', 'Firebase', 'Redux'],
-      url: 'https://example.com',
-      featured: false,
+    description: {
+      ar: 'منصة تجارة إلكترونية شاملة مع نظام دفع متقدم وإدارة المخزون',
+      en: 'Comprehensive e-commerce platform with advanced payment system and inventory management',
     },
-    {
-      id: 3,
-      title: 'موقع شركة تقنية',
-      titleEn: 'Tech Company Website',
-      description: 'موقع ويب حديث لشركة تقنية مع تصميم متجاوب وأداء عالي',
-      descriptionEn: 'Modern website for tech company with responsive design and high performance',
-      image: '/api/placeholder/600/400',
-      category: 'website',
-      technologies: ['Vue.js', 'Nuxt.js', 'TailwindCSS'],
-      url: 'https://example.com',
-      featured: true,
+    image: '/api/placeholder/600/400',
+    category: 'ecommerce',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    url: 'https://example.com',
+    github: 'https://github.com/example',
+    featured: true,
+  },
+  {
+    id: 2,
+    title: {
+      ar: 'تطبيق إدارة المهام',
+      en: 'Task Management App',
     },
-    {
-      id: 4,
-      title: 'نظام إدارة المحتوى',
-      titleEn: 'Content Management System',
-      description: 'نظام إدارة محتوى مخصص للمؤسسات مع واجهة إدارة متقدمة',
-      descriptionEn: 'Custom content management system for institutions with advanced admin interface',
-      image: '/api/placeholder/600/400',
-      category: 'website',
-      technologies: ['Laravel', 'Vue.js', 'MySQL'],
-      url: 'https://example.com',
-      featured: false,
+    description: {
+      ar: 'تطبيق موبايل لإدارة المهام والمشاريع مع ميزات التعاون الجماعي',
+      en: 'Mobile app for task and project management with team collaboration features',
     },
-    {
-      id: 5,
-      title: 'تطبيق التوصيل',
-      titleEn: 'Delivery App',
-      description: 'تطبيق للتوصيل السريع مع تتبع الطلبات في الوقت الفعلي',
-      descriptionEn: 'Fast delivery app with real-time order tracking',
-      image: '/api/placeholder/600/400',
-      category: 'mobile',
-      technologies: ['Flutter', 'Firebase', 'Google Maps'],
-      url: 'https://example.com',
-      featured: true,
+    image: '/api/placeholder/600/400',
+    category: 'mobile',
+    technologies: ['React Native', 'Firebase', 'Redux'],
+    url: 'https://example.com',
+    featured: false,
+  },
+  {
+    id: 3,
+    title: {
+      ar: 'موقع شركة تقنية',
+      en: 'Tech Company Website',
     },
-    {
-      id: 6,
-      title: 'موقع مؤسسي',
-      titleEn: 'Corporate Website',
-      description: 'موقع إلكتروني لمؤسسة كبيرة مع نظام إدارة الأخبار والفعاليات',
-      descriptionEn: 'Corporate website for large institution with news and events management system',
-      image: '/api/placeholder/600/400',
-      category: 'corporate',
-      technologies: ['WordPress', 'PHP', 'MySQL'],
-      url: 'https://example.com',
-      featured: false,
+    description: {
+      ar: 'موقع ويب حديث لشركة تقنية مع تصميم متجاوب وأداء عالي',
+      en: 'Modern website for tech company with responsive design and high performance',
     },
+    image: '/api/placeholder/600/400',
+    category: 'website',
+    technologies: ['Vue.js', 'Nuxt.js', 'TailwindCSS'],
+    url: 'https://example.com',
+    featured: true,
+  },
+  {
+    id: 4,
+    title: {
+      ar: 'نظام إدارة المحتوى',
+      en: 'Content Management System',
+    },
+    description: {
+      ar: 'نظام إدارة محتوى مخصص للمؤسسات مع واجهة إدارة متقدمة',
+      en: 'Custom content management system for institutions with advanced admin interface',
+    },
+    image: '/api/placeholder/600/400',
+    category: 'website',
+    technologies: ['Laravel', 'Vue.js', 'MySQL'],
+    url: 'https://example.com',
+    featured: false,
+  },
+  {
+    id: 5,
+    title: {
+      ar: 'تطبيق التوصيل',
+      en: 'Delivery App',
+    },
+    description: {
+      ar: 'تطبيق للتوصيل السريع مع تتبع الطلبات في الوقت الفعلي',
+      en: 'Fast delivery app with real-time order tracking',
+    },
+    image: '/api/placeholder/600/400',
+    category: 'mobile',
+    technologies: ['Flutter', 'Firebase', 'Google Maps'],
+    url: 'https://example.com',
+    featured: true,
+  },
+  {
+    id: 6,
+    title: {
+      ar: 'موقع مؤسسي',
+      en: 'Corporate Website',
+    },
+    description: {
+      ar: 'موقع إلكتروني لمؤسسة كبيرة مع نظام إدارة الأخبار والفعاليات',
+      en: 'Corporate website for large institution with news and events management system',
+    },
+    image: '/api/placeholder/600/400',
+    category: 'corporate',
+    technologies: ['WordPress', 'PHP', 'MySQL'],
+    url: 'https://example.com',
+    featured: false,
+  }
         ]);
       } finally {
         setLoading(false);
@@ -108,18 +133,17 @@ const Projects = () => {
   }, []);
 
   const categories = [
-    { key: 'all', icon: '🌐' },
-    { key: 'website', icon: '💻' },
-    { key: 'mobile', icon: '📱' },
-    { key: 'ecommerce', icon: '🛒' },
-    { key: 'corporate', icon: '🏢' },
+    { key: 'all', icon: '🌐', labelKey: 'projects.categories.all' },
+    { key: 'website', icon: '💻', labelKey: 'projects.categories.website' },
+    { key: 'mobile', icon: '📱', labelKey: 'projects.categories.mobile' },
+    { key: 'ecommerce', icon: '🛒', labelKey: 'projects.categories.ecommerce' },
+    { key: 'corporate', icon: '🏢', labelKey: 'projects.categories.corporate' },
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
-  // Show loading spinner while fetching data
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -139,6 +163,11 @@ const Projects = () => {
       default: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
     };
     return colors[tech] || colors.default;
+  };
+
+  const getLocalizedText = (item, field) => {
+    if (!item[field]) return '';
+    return item[field][lang] || item[field].en || item[field].ar || '';
   };
 
   return (
@@ -187,13 +216,13 @@ const Projects = () => {
                 }`}
               >
                 <span>{category.icon}</span>
-                <span>{t(`projects.categories.${category.key}`)}</span>
+                <span>{t(category.labelKey)}</span>
               </button>
             ))}
           </motion.div>
 
           {/* Projects Grid */}
-          <motion.div 
+          <motion.div
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
@@ -213,7 +242,7 @@ const Projects = () => {
                     <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
                       <span className="text-6xl opacity-50">🖼️</span>
                     </div>
-                    
+
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
                       <div className="flex space-x-4 rtl:space-x-reverse">
@@ -224,8 +253,19 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-red hover:scale-110 transition-transform duration-300"
                           >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            {/* External Link Icon */}
+                            <svg
+                              className="w-6 h-6"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
                             </svg>
                           </a>
                         )}
@@ -236,8 +276,13 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-red hover:scale-110 transition-transform duration-300"
                           >
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            {/* GitHub Icon */}
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                             </svg>
                           </a>
                         )}
@@ -247,7 +292,7 @@ const Projects = () => {
                     {/* Featured Badge */}
                     {project.featured && (
                       <div className="absolute top-4 right-4 bg-brand-red text-white px-3 py-1 rounded-full text-sm font-medium">
-                        مميز
+                        {t('projects.featured')}
                       </div>
                     )}
                   </div>
@@ -255,11 +300,11 @@ const Projects = () => {
                   {/* Project Info */}
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                      {project.title?.ar || project.title || project.titleEn}
+                      {getLocalizedText(project, 'title')}
                     </h3>
-                    
+
                     <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                      {project.description?.ar || project.description || project.descriptionEn}
+                      {getLocalizedText(project, 'description')}
                     </p>
 
                     {/* Technologies */}
@@ -305,10 +350,10 @@ const Projects = () => {
             >
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                لا توجد مشاريع
+                {t('projects.noProjectsTitle')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                لا توجد مشاريع في هذه الفئة حالياً
+                {t('projects.noProjectsDesc')}
               </p>
             </motion.div>
           )}
@@ -325,10 +370,10 @@ const Projects = () => {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              هل أعجبتك أعمالنا؟
+              {t('projects.ctaTitle')}
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              نحن مستعدون لتحويل فكرتك إلى مشروع ناجح. تواصل معنا اليوم ولنبدأ العمل على مشروعك القادم
+              {t('projects.ctaDesc')}
             </p>
             <motion.a
               href="/contact"
@@ -336,7 +381,7 @@ const Projects = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-white text-brand-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
             >
-              ابدأ مشروعك معنا
+              {t('projects.ctaButton')}
             </motion.a>
           </motion.div>
         </div>

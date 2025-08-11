@@ -7,6 +7,7 @@ import { contactAPI, handleApiError } from '../services/api';
 
 const Contact = () => {
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,12 +30,11 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Send data to backend
       const response = await contactAPI.submit({
         ...formData,
-        category: 'general' // Default category
+        category: 'general'
       });
-      
+
       toast.success(response.data.message || t('contact.form.success'));
       setFormData({
         name: '',
@@ -60,7 +60,7 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.address'),
-      value: 'دمشق، سوريا\nشارع الثورة - المالكي',
+      value: t('contact.info.addressValue'),
       color: 'text-brand-red',
     },
     {
@@ -70,7 +70,7 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.phone'),
-      value: '+963 XXX XXX XXX\n+963 YYY YYY YYY',
+      value: t('contact.info.phoneValue'),
       color: 'text-brand-pink',
     },
     {
@@ -80,7 +80,7 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.email'),
-      value: 'info@shiftstart.sy\nsupport@shiftstart.sy',
+      value: t('contact.info.emailValue'),
       color: 'text-brand-purple',
     },
     {
@@ -90,7 +90,7 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.hours'),
-      value: 'السبت - الخميس\n9:00 ص - 6:00 م',
+      value: t('contact.info.hoursValue'),
       color: 'text-brand-orange',
     },
   ];
@@ -203,10 +203,10 @@ const Contact = () => {
             >
               <div className="card p-8">
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  أرسل لنا رسالة
+                  {t('contact.form.sendMessageTitle')}
                 </h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -220,7 +220,7 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
-                        placeholder="أدخل اسمك الكامل"
+                        placeholder={t('contact.form.namePlaceholder')}
                       />
                     </div>
                     
@@ -236,7 +236,7 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
-                        placeholder="example@domain.com"
+                        placeholder={t('contact.form.emailPlaceholder')}
                       />
                     </div>
                   </div>
@@ -253,7 +253,7 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         className="form-input"
-                        placeholder="+963 XXX XXX XXX"
+                        placeholder={t('contact.form.phonePlaceholder')}
                       />
                     </div>
                     
@@ -269,7 +269,7 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
-                        placeholder="موضوع الرسالة"
+                        placeholder={t('contact.form.subjectPlaceholder')}
                       />
                     </div>
                   </div>
@@ -286,7 +286,7 @@ const Contact = () => {
                       required
                       rows={6}
                       className="form-textarea"
-                      placeholder="اكتب رسالتك هنا..."
+                      placeholder={t('contact.form.messagePlaceholder')}
                     />
                   </div>
 
@@ -310,111 +310,45 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Map & Additional Info */}
+            {/* Map Section */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-8"
+              className="overflow-hidden rounded-xl shadow-lg"
+              aria-label={t('contact.mapLabel')}
             >
-              {/* Map Placeholder */}
-              <div className="card p-8">
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                  موقعنا
-                </h3>
-                <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-gray-600 dark:text-gray-400">خريطة الموقع</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
-                      دمشق، سوريا - شارع الثورة
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="card p-8">
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                  تابعنا على
-                </h3>
-                <div className="flex space-x-4 rtl:space-x-reverse">
-                  {socialLinks.map((social) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 ${social.color} transition-colors duration-300`}
-                    >
-                      {social.icon}
-                    </motion.a>
-                  ))}
-                </div>
-                
-                <div className="mt-6 p-4 bg-brand-gradient/10 rounded-lg">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    💡 <strong>نصيحة:</strong> يمكنك أيضاً التواصل معنا مباشرة عبر وسائل التواصل الاجتماعي للحصول على رد سريع.
-                  </p>
-                </div>
-              </div>
+              <iframe
+                title={t('contact.mapTitle')}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.8640088379636!2d100.50176581526032!3d13.724906490352895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29edaa5a2f2ef%3A0xb317f9be6a5ee59!2sBangkok%2C%20Thailand!5e0!3m2!1sen!2sus!4v1621030171861!5m2!1sen!2sus"
+                width="100%"
+                height="450"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="border-0 w-full h-full"
+              ></iframe>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Social Media Section */}
       <section className="section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-              الأسئلة الشائعة
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              إجابات على الأسئلة الأكثر شيوعاً
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                question: 'كم يستغرق تطوير موقع ويب؟',
-                answer: 'يعتمد على تعقيد المشروع، لكن عادة ما يستغرق من 2-6 أسابيع للمواقع البسيطة و 2-4 أشهر للمشاريع المعقدة.'
-              },
-              {
-                question: 'هل تقدمون خدمات الصيانة؟',
-                answer: 'نعم، نقدم خدمات صيانة ودعم فني مستمر لجميع مشاريعنا مع ضمان الاستجابة السريعة.'
-              },
-              {
-                question: 'ما هي أسعاركم؟',
-                answer: 'تختلف الأسعار حسب نوع المشروع ومتطلباته. تواصل معنا للحصول على عرض سعر مخصص ومجاني.'
-              },
-              {
-                question: 'هل تعملون مع العملاء خارج سوريا؟',
-                answer: 'نعم، نعمل مع عملاء من جميع أنحاء العالم ونقدم خدماتنا عن بُعد بكفاءة عالية.'
-              }
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card p-6"
+        <div className="container-custom text-center">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">{t('contact.followUs')}</h2>
+          <div className="flex justify-center gap-8 text-gray-600 dark:text-gray-400">
+            {socialLinks.map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                aria-label={social.name}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`transition-colors duration-300 ${social.color} hover:text-opacity-80`}
               >
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {faq.answer}
-                </p>
-              </motion.div>
+                {social.icon}
+              </a>
             ))}
           </div>
         </div>

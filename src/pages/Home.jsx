@@ -99,7 +99,7 @@ const Home = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5"></div>
-        
+
         {/* Animated background shapes */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-20 h-20 bg-brand-red/20 rounded-full blur-xl animate-float"></div>
@@ -121,21 +121,21 @@ const Home = () => {
             >
               <span className="gradient-text">{t('hero.title')}</span>
             </motion.h1>
-            
+
             <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
             >
               {t('hero.subtitle')}
             </motion.p>
-            
+
             <motion.p
               variants={fadeInUp}
               className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
             >
               {t('hero.description')}
             </motion.p>
-            
+
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -220,53 +220,52 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="section-padding bg-brand-gradient text-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.key}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl font-bold mb-2">{stat.number}</div>
-                <div className="text-lg opacity-90">
-                  {stat.key === 'projects' && 'مشروع مكتمل'}
-                  {stat.key === 'clients' && 'عميل سعيد'}
-                  {stat.key === 'years' && 'سنوات خبرة'}
-                  {stat.key === 'support' && 'دعم فني'}
-                </div>
-              </motion.div>
-            ))}
+     <section className="section-padding bg-brand-gradient text-white">
+  <div className="container-custom">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {stats.map((stat, index) => (
+        <motion.div
+          key={stat.key}
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="text-center"
+        >
+          <div className="text-4xl md:text-5xl font-bold mb-2">{stat.number}</div>
+          <div className="text-lg opacity-90">
+            {t(`stat.${stat.key}`)}
           </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Call to Action */}
       <section className="section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
-              هل لديك مشروع في ذهنك؟
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              نحن هنا لمساعدتك في تحويل أفكارك إلى واقع رقمي مذهل. تواصل معنا اليوم ولنبدأ رحلة النجاح معاً.
-            </p>
-            <Link
-              to="/contact"
-              className="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg inline-block"
-            >
-              ابدأ مشروعك الآن
-            </Link>
-          </motion.div>
-        </div>
+       <div className="container-custom">
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="text-center bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12"
+  >
+    <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
+      {t(`callToAction.title`)}
+    </h2>
+    <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+      {t(`callToAction.description`)}
+    </p>
+    <Link
+      to="/contact"
+      className="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg inline-block"
+    >
+      {t(`callToAction.button`)}
+    </Link>
+  </motion.div>
+</div>
+
       </section>
     </>
   );
