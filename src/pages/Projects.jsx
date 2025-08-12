@@ -14,6 +14,15 @@ const Projects = () => {
 
   const lang = i18n.language;
 
+  // ألوان الذهب والفضة (تدرجات ناعمة)
+  const colors = {
+    goldDark: '#bfa951',
+    goldMedium: '#dbba45',
+    goldLight: '#f4d580',
+    silverDark: '#7a6e4e',
+    silverLight: '#f4f1df',
+  };
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -26,7 +35,7 @@ const Projects = () => {
         setError(errorInfo.message);
         // بيانات افتراضية في حال خطأ API
         setProjects([
-    {
+           {
     id: 1,
     title: {
       ar: 'متجر إلكتروني متكامل',
@@ -149,8 +158,8 @@ const Projects = () => {
   }
 
   const getTechColor = (tech) => {
-    const colors = {
-      React: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+    const colorsTech = {
+      React: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
       'Vue.js': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
       'Node.js': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
       MongoDB: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
@@ -162,7 +171,7 @@ const Projects = () => {
       TypeScript: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
       default: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
     };
-    return colors[tech] || colors.default;
+    return colorsTech[tech] || colorsTech.default;
   };
 
   const getLocalizedText = (item, field) => {
@@ -178,7 +187,12 @@ const Projects = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section
+        className="relative py-20"
+        style={{
+          background: `linear-gradient(to bottom right, ${colors.goldLight}22, ${colors.silverLight}22)`,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -186,10 +200,20 @@ const Projects = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('projects.title')}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p
+              className="text-xl max-w-3xl mx-auto"
+              style={{ color: colors.silverDark }}
+            >
               {t('projects.subtitle')}
             </p>
           </motion.div>
@@ -197,7 +221,10 @@ const Projects = () => {
       </section>
 
       {/* Filter Buttons */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
+      <section
+        className="section-padding"
+        style={{ backgroundColor: colors.silverLight }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -209,11 +236,20 @@ const Projects = () => {
               <button
                 key={category.key}
                 onClick={() => setActiveFilter(category.key)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse ${
-                  activeFilter === category.key
-                    ? 'bg-brand-gradient text-white shadow-lg'
-                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-                }`}
+                className="px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse"
+                style={{
+                  background:
+                    activeFilter === category.key
+                      ? `linear-gradient(90deg, ${colors.goldDark}, ${colors.goldMedium})`
+                      : 'white',
+                  color: activeFilter === category.key
+                    ? colors.silverLight
+                    : colors.silverDark,
+                  boxShadow: activeFilter === category.key
+                    ? `0 4px 10px ${colors.goldMedium}aa`
+                    : 'none',
+                  border: activeFilter === category.key ? `1px solid ${colors.goldMedium}` : `1px solid ${colors.silverDark}`,
+                }}
               >
                 <span>{category.icon}</span>
                 <span>{t(category.labelKey)}</span>
@@ -236,22 +272,37 @@ const Projects = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="card overflow-hidden hover-lift h-full">
+                <div
+                  className="card overflow-hidden hover-lift h-full"
+                  style={{
+                    boxShadow: `0 4px 15px ${colors.goldMedium}88`,
+                    border: `1px solid ${colors.goldLight}`,
+                    backgroundColor: colors.silverLight,
+                  }}
+                >
                   {/* Project Image */}
                   <div className="relative overflow-hidden">
-                    <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
-                      <span className="text-6xl opacity-50">🖼️</span>
-                    </div>
+                    <img
+                      src={project.image}
+                      alt={getLocalizedText(project, 'title')}
+                      className="w-full h-48 object-cover"
+                    />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center"
+                      style={{
+                        background: `linear-gradient(90deg, ${colors.goldDark}cc, ${colors.goldMedium}cc)`,
+                      }}
+                    >
                       <div className="flex space-x-4 rtl:space-x-reverse">
                         {project.url && (
                           <a
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-red hover:scale-110 transition-transform duration-300"
+                            className="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                            style={{ color: colors.goldDark }}
                           >
                             {/* External Link Icon */}
                             <svg
@@ -274,7 +325,8 @@ const Projects = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-red hover:scale-110 transition-transform duration-300"
+                            className="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+                            style={{ color: colors.goldDark }}
                           >
                             {/* GitHub Icon */}
                             <svg
@@ -291,7 +343,14 @@ const Projects = () => {
 
                     {/* Featured Badge */}
                     {project.featured && (
-                      <div className="absolute top-4 right-4 bg-brand-red text-white px-3 py-1 rounded-full text-sm font-medium">
+                      <div
+                        className="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium"
+                        style={{
+                          backgroundColor: colors.goldDark,
+                          color: colors.silverLight,
+                          boxShadow: `0 0 8px ${colors.goldMedium}`,
+                        }}
+                      >
                         {t('projects.featured')}
                       </div>
                     )}
@@ -299,11 +358,17 @@ const Projects = () => {
 
                   {/* Project Info */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                    <h3
+                      className="text-xl font-bold mb-3"
+                      style={{ color: colors.silverDark }}
+                    >
                       {getLocalizedText(project, 'title')}
                     </h3>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    <p
+                      className="mb-4 leading-relaxed"
+                      style={{ color: colors.silverDark }}
+                    >
                       {getLocalizedText(project, 'description')}
                     </p>
 
@@ -326,12 +391,25 @@ const Projects = () => {
                           href={project.links?.live || project.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 bg-brand-gradient text-white py-2 px-4 rounded-lg text-center text-sm font-medium hover:shadow-lg transition-all duration-300"
+                          className="flex-1 py-2 px-4 rounded-lg text-center text-sm font-medium hover:shadow-lg transition-all duration-300"
+                          style={{
+                            background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.goldMedium})`,
+                            color: colors.silverLight,
+                            boxShadow: `0 4px 10px ${colors.goldMedium}aa`,
+                          }}
                         >
                           {t('projects.visitSite')}
                         </a>
                       )}
-                      <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300">
+                      <button
+                        className="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300"
+                        style={{
+                          border: `1px solid ${colors.goldMedium}`,
+                          color: colors.goldDark,
+                          backgroundColor: colors.silverLight,
+                        }}
+                        onClick={() => alert(t('projects.viewProject'))}
+                      >
                         {t('projects.viewProject')}
                       </button>
                     </div>
@@ -347,12 +425,13 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-16"
+              style={{ color: colors.silverDark }}
             >
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl font-semibold mb-2">
                 {t('projects.noProjectsTitle')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p>
                 {t('projects.noProjectsDesc')}
               </p>
             </motion.div>
@@ -361,7 +440,13 @@ const Projects = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="section-padding bg-brand-gradient text-white">
+      <section
+        className="section-padding"
+        style={{
+          background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.goldMedium})`,
+          color: colors.silverLight,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -379,7 +464,15 @@ const Projects = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-brand-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+              className="px-8 py-4 rounded-lg font-semibold text-lg inline-block"
+              style={{
+                backgroundColor: colors.silverLight,
+                color: colors.goldDark,
+                boxShadow: `0 4px 10px ${colors.goldMedium}aa`,
+                transition: 'background-color 0.3s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.goldLight)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.silverLight)}
             >
               {t('projects.ctaButton')}
             </motion.a>

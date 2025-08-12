@@ -20,6 +20,21 @@ module.exports = {
           800: '#9a1b69',
           900: '#831b5c',
         },
+        gold: {
+          DEFAULT: '#d4af37',
+          300: '#f4d35e',
+          400: '#f0c419',
+          500: '#d4af37', // اللون الذهبي الأساسي
+          600: '#b88a0d',
+          700: '#9b7a0c',
+        },
+        silver: {
+          300: '#c0c0c0',
+          400: '#a8a8a8',
+          500: '#909090',
+          600: '#787878',
+          700: '#606060',
+        },
         secondary: {
           50: '#fdf4ff',
           100: '#fae8ff',
@@ -49,12 +64,12 @@ module.exports = {
           pink: '#D22E9C',
           purple: '#8C1CCB',
           orange: '#FF6A3D',
-          dark: '#1C1C1E'
-        }
+          dark: '#1C1C1E',
+        },
       },
       fontFamily: {
-        'arabic': ['Noto Sans Arabic', 'Arial', 'sans-serif'],
-        'english': ['Inter', 'system-ui', 'sans-serif'],
+        arabic: ['Noto Sans Arabic', 'Arial', 'sans-serif'],
+        english: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -81,6 +96,7 @@ module.exports = {
         },
       },
       backgroundImage: {
+        'gold-silver-gradient': 'linear-gradient(135deg, #d4af37 0%, #c0c0c0 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'brand-gradient': 'linear-gradient(135deg, #FF3C6E 0%, #D22E9C 50%, #8C1CCB 100%)',
@@ -90,9 +106,9 @@ module.exports = {
         xs: '2px',
       },
       screens: {
-        'xs': '475px',
+        xs: '475px',
       },
     },
   },
   plugins: [],
-}
+};

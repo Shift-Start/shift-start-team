@@ -108,14 +108,14 @@ const Team = () => {
 
   const getRoleColor = (role) => {
     const colors = {
-      fullstack: 'from-blue-500 to-purple-500',
-      frontend: 'from-green-500 to-blue-500',
-      backend: 'from-orange-500 to-red-500',
-      ui: 'from-pink-500 to-purple-500',
-      ux: 'from-purple-500 to-indigo-500',
-      manager: 'from-gray-600 to-gray-800',
+      fullstack: 'from-[#bfa951] to-[#7a6e4e]',     // ذهبي غامق -> بني
+      frontend: 'from-[#d6c683] to-[#a18e30]',     // ذهبي متوسط -> ذهبي داكن
+      backend: 'from-[#c1a65c] to-[#8c7d36]',      // ذهبي فاتح -> ذهبي متوسط
+      ui: 'from-[#d4b86a] to-[#ad9b51]',           // ذهبي ناعم
+      ux: 'from-[#bba856] to-[#7c6f3f]',           // ذهبي داكن
+      manager: 'from-[#8f8c7f] to-[#595744]',      // رمادي معدني
     };
-    return colors[role] || 'from-gray-500 to-gray-700';
+    return colors[role] || 'from-[#a18e30] to-[#7a6e4e]'; // لون افتراضي ذهبي
   };
 
   const getSocialIcon = (platform) => {
@@ -161,7 +161,7 @@ const Team = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="relative py-20 bg-gradient-to-br from-[#ecd09c]/20 via-[#f4d580]/20 to-[#dbba45]/20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -169,10 +169,18 @@ const Team = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                background:
+                  'linear-gradient(to right, #bfa951, #dbba45)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('team.title')}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#7a6e4e' }}>
               {t('team.subtitle')}
             </p>
           </motion.div>
@@ -191,7 +199,7 @@ const Team = () => {
                 transition={{ delay: index * 0.15 }}
                 className="group"
               >
-                <div className="card p-6 text-center hover-lift relative overflow-hidden bg-white dark:bg-gray-900 rounded-lg shadow-md">
+                <div className="card p-6 text-center hover-lift relative overflow-hidden bg-gradient-to-br from-[#f4f1df] to-[#dbd3a5] rounded-lg shadow-md">
                   {/* Background gradient on hover */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${getRoleColor(
@@ -217,52 +225,41 @@ const Team = () => {
                           </div>
                         )}
                       </div>
-
-                      <div
-                        className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getRoleColor(
-                          member.role
-                        )}`}
-                      >
-                        {t(`team.roles.${member.role}`)}
-                      </div>
                     </div>
 
-                    {/* Name */}
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                    <h3 className="text-xl font-bold mb-2" style={{ color: '#7a6e4e' }}>
                       {t(member.nameKey)}
                     </h3>
-
-                    {/* Bio */}
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed min-h-[70px]">
+                    <p
+                      className="mb-4 leading-relaxed min-h-[70px]"
+                      style={{ color: '#9f966d' }}
+                    >
                       {t(member.bioKey)}
                     </p>
-
-                    {/* Skills */}
-                    <div className="flex flex-wrap justify-center gap-2 mb-6">
+                    <div className="mb-4 flex flex-wrap justify-center gap-2">
                       {member.skills.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full"
+                          className="px-3 py-1 bg-[#f7f4e8] text-[#7a6e4e] text-xs rounded-full"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
-
-                    {/* Social icons */}
-                    <div className="flex justify-center space-x-4 rtl:space-x-reverse">
-                      {Object.entries(member.social).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 bg-gray-100 dark:bg-gray-700 hover:bg-brand-red dark:hover:bg-brand-red text-gray-600 dark:text-gray-400 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
-                          aria-label={platform}
-                        >
-                          {getSocialIcon(platform)}
-                        </a>
-                      ))}
+                    <div className="flex justify-center space-x-4">
+                      {member.social &&
+                        Object.entries(member.social).map(([platform, url]) => (
+                          <a
+                            key={platform}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 bg-[#f4e68c] hover:bg-[#a18e30] text-[#7a6e4e] hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                            aria-label={platform}
+                          >
+                            {getSocialIcon(platform)}
+                          </a>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -273,62 +270,63 @@ const Team = () => {
       </section>
 
       {/* Join Us Section */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
+      <section className="section-padding" style={{ backgroundColor: '#f4eac1' }}>
+        <div className="container-custom text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-6"
+            style={{
+              background:
+                'linear-gradient(to right, #bfa951, #dbba45)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
-              {t('team.joinUs.title')}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              {t('team.joinUs.description')}
-            </p>
+            {t('team.joinUs.title')}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto mb-8"
+            style={{ color: '#7a6e4e' }}
+          >
+            {t('team.joinUs.description')}
+          </motion.p>
+          <motion.h3
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-semibold mb-2"
+            style={{ color: '#7a6e4e' }}
+          >
+            {t('team.joinUs.creativeEnvironment.title')}
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-sm mb-8"
+            style={{ color: '#9f966d' }}
+          >
+            {t('team.joinUs.creativeEnvironment.desc')}
+          </motion.p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🚀</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  {t('team.joinUs.creativeEnvironment.title')}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {t('team.joinUs.creativeEnvironment.desc')}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="text-4xl mb-2">📚</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  {t('team.joinUs.continuousDevelopment.title')}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {t('team.joinUs.continuousDevelopment.desc')}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="text-4xl mb-2">🤝</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  {t('team.joinUs.teamwork.title')}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {t('team.joinUs.teamwork.desc')}
-                </p>
-              </div>
-            </div>
-
-            <motion.a
-              href="mailto:careers@shiftstart.sy"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg inline-block"
-            >
-              {t('team.joinUs.sendCV')}
-            </motion.a>
-          </motion.div>
+          <motion.a
+            href="mailto:careers@shiftstart.sy"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-4 rounded-lg font-semibold text-lg inline-block"
+            style={{
+              background: 'linear-gradient(90deg, #bfa951, #dbba45)',
+              color: 'white',
+              boxShadow: '0 4px 10px rgba(219, 186, 69, 0.6)',
+            }}
+          >
+            {t('team.joinUs.sendCV')}
+          </motion.a>
         </div>
       </section>
     </>

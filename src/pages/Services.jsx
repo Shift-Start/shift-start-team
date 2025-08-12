@@ -12,6 +12,15 @@ const Services = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
+  // استبدال الألوان بتدرجات ذهبي-فضي ناعمة
+  const colors = {
+    goldDark: '#bfa951',
+    goldMedium: '#dbba45',
+    goldLight: '#f4d580',
+    silverDark: '#7a6e4e',
+    silverLight: '#f4f1df',
+  };
+
   const services = [
     {
       key: 'webDevelopment',
@@ -26,7 +35,7 @@ const Services = () => {
         'services.webDevelopment.features.2',
         'services.webDevelopment.features.3',
       ],
-      color: 'from-blue-500 to-cyan-500',
+      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
     },
     {
       key: 'webDesign',
@@ -41,7 +50,7 @@ const Services = () => {
         'services.webDesign.features.2',
         'services.webDesign.features.3',
       ],
-      color: 'from-purple-500 to-pink-500',
+      color: `from-[${colors.goldLight}] to-[${colors.goldDark}]`,
     },
     {
       key: 'mobileApps',
@@ -56,7 +65,7 @@ const Services = () => {
         'services.mobileApps.features.2',
         'services.mobileApps.features.3',
       ],
-      color: 'from-green-500 to-emerald-500',
+      color: `from-[${colors.silverLight}] to-[${colors.silverDark}]`,
     },
     {
       key: 'ecommerce',
@@ -71,7 +80,7 @@ const Services = () => {
         'services.ecommerce.features.2',
         'services.ecommerce.features.3',
       ],
-      color: 'from-orange-500 to-red-500',
+      color: `from-[${colors.goldLight}] to-[${colors.goldDark}]`,
     },
     {
       key: 'seo',
@@ -86,7 +95,7 @@ const Services = () => {
         'services.seo.features.2',
         'services.seo.features.3',
       ],
-      color: 'from-yellow-500 to-orange-500',
+      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
     },
     {
       key: 'maintenance',
@@ -102,7 +111,7 @@ const Services = () => {
         'services.maintenance.features.2',
         'services.maintenance.features.3',
       ],
-      color: 'from-indigo-500 to-purple-500',
+      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
     },
   ];
 
@@ -168,7 +177,12 @@ const Services = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section
+        className="relative py-20"
+        style={{
+          background: `linear-gradient(135deg, ${colors.goldLight}20, ${colors.silverLight}20, ${colors.goldLight}20)`,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -176,10 +190,17 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('services.title')}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: colors.silverDark }}>
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -198,27 +219,54 @@ const Services = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="card p-8 h-full hover-lift relative overflow-hidden">
+                <div
+                  className="card p-8 h-full hover-lift relative overflow-hidden rounded-lg shadow-md"
+                  style={{
+                    background: `linear-gradient(135deg, ${colors.silverLight}, ${colors.goldLight})`,
+                    border: `1px solid ${colors.goldMedium}`,
+                  }}
+                >
                   {/* Background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                  
+                  <div
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
+                    style={{
+                      background: `linear-gradient(135deg, ${colors.goldDark}, ${colors.silverLight})`,
+                      zIndex: 0,
+                    }}
+                  ></div>
+
                   <div className="relative z-10">
-                    <div className="w-20 h-20 bg-brand-gradient rounded-2xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
+                    <div
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white"
+                      style={{
+                        background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.silverLight})`,
+                      }}
+                    >
                       {service.icon}
                     </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+
+                    <h3
+                      className="text-2xl font-bold mb-4"
+                      style={{ color: colors.silverDark }}
+                    >
                       {t(`services.${service.key}.title`)}
                     </h3>
-                    
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+
+                    <p className="mb-6 leading-relaxed" style={{ color: '#7a6e4e' }}>
                       {t(`services.${service.key}.description`)}
                     </p>
-                    
+
                     <div className="space-y-2">
                       {service.featuresKeys.map((featureKey, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                          <div className="w-2 h-2 bg-brand-red rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
+                        <div
+                          key={idx}
+                          className="flex items-center text-sm"
+                          style={{ color: '#8c7d36' }}
+                        >
+                          <div
+                            className="w-2 h-2 rounded-full mr-3 rtl:ml-3 rtl:mr-0"
+                            style={{ backgroundColor: colors.goldDark }}
+                          ></div>
                           {t(featureKey)}
                         </div>
                       ))}
@@ -232,7 +280,10 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
+      <section
+        className="section-padding"
+        style={{ backgroundColor: colors.silverLight }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -240,10 +291,17 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('services.process.title')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p style={{ color: colors.silverDark }} className="text-lg max-w-2xl mx-auto">
               {t('services.process.subtitle')}
             </p>
           </motion.div>
@@ -257,20 +315,35 @@ const Services = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="card p-6 text-center hover-lift h-full">
+                <div
+                  className="card p-6 text-center hover-lift h-full rounded-lg shadow"
+                  style={{
+                    border: `1px solid ${colors.goldMedium}`,
+                    backgroundColor: colors.silverLight,
+                    color: colors.silverDark,
+                  }}
+                >
                   <div className="text-4xl mb-4">{step.icon}</div>
-                  <div className="text-sm font-bold text-brand-red mb-2">{step.step}</div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+                  <div
+                    className="text-sm font-bold mb-2"
+                    style={{ color: colors.goldDark }}
+                  >
+                    {step.step}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">
                     {t(step.titleKey)}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {t(step.descriptionKey)}
-                  </p>
+                  <p>{t(step.descriptionKey)}</p>
                 </div>
-                
+
                 {/* Connector line */}
                 {index < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-brand-gradient"></div>
+                  <div
+                    className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 rounded"
+                    style={{
+                      background: `linear-gradient(to right, ${colors.goldDark}, ${colors.silverLight})`,
+                    }}
+                  ></div>
                 )}
               </motion.div>
             ))}
@@ -287,10 +360,17 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('services.technologies.title')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p style={{ color: colors.silverDark }} className="text-lg max-w-2xl mx-auto">
               {t('services.technologies.subtitle')}
             </p>
           </motion.div>
@@ -302,11 +382,14 @@ const Services = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="card p-4 text-center hover-lift"
+                className="card p-4 text-center hover-lift rounded-lg shadow"
+                style={{
+                  border: `1px solid ${colors.goldMedium}`,
+                  color: colors.silverDark,
+                  backgroundColor: colors.silverLight,
+                }}
               >
-                <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t(techKey)}
-                </div>
+                <div className="text-sm font-medium">{t(techKey)}</div>
               </motion.div>
             ))}
           </div>
@@ -314,7 +397,13 @@ const Services = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="section-padding bg-brand-gradient text-white">
+      <section
+        className="section-padding text-white rounded-lg"
+        style={{
+          background: `linear-gradient(90deg, ${colors.goldMedium}, ${colors.silverLight})`,
+          boxShadow: `0 4px 10px ${colors.goldMedium}80`,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -322,22 +411,18 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {t('services.cta.title')}
-            </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              {t('services.cta.subtitle')}
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('services.cta.title')}</h2>
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">{t('services.cta.subtitle')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white text-brand-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+                className="bg-white text-[#bfa951] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
               >
                 {t('services.cta.startProject')}
               </Link>
               <Link
                 to="/projects"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-red transition-all duration-300 inline-block"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#bfa951] transition-all duration-300 inline-block"
               >
                 {t('services.cta.viewProjects')}
               </Link>

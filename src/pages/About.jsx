@@ -27,6 +27,14 @@ const About = () => {
     },
   };
 
+  const colors = {
+    goldDark: '#bfa951',
+    goldMedium: '#dbba45',
+    goldLight: '#f4d580',
+    silverDark: '#7a6e4e',
+    silverLight: '#f4f1df',
+  };
+
   const values = [
     {
       key: 'quality',
@@ -70,7 +78,12 @@ const About = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section
+        className="relative py-20"
+        style={{
+          background: `linear-gradient(135deg, ${colors.goldLight}20, ${colors.silverLight}20, ${colors.goldLight}20)`,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -78,10 +91,20 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('about.title')}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p
+              className="text-xl max-w-3xl mx-auto"
+              style={{ color: colors.silverDark }}
+            >
               {t('about.subtitle')}
             </p>
           </motion.div>
@@ -97,13 +120,22 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h2
+                className="text-3xl md:text-4xl font-bold mb-6"
+                style={{ color: colors.silverDark }}
+              >
                 {t('about.storyTitle', 'قصتنا')}
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+              <p
+                className="text-lg mb-6 leading-relaxed"
+                style={{ color: colors.silverDark }}
+              >
                 {t('about.description')}
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p
+                className="text-lg leading-relaxed"
+                style={{ color: colors.silverDark }}
+              >
                 {t('about.additionalText')}
               </p>
             </motion.div>
@@ -114,58 +146,142 @@ const About = () => {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="w-full h-80 bg-brand-gradient rounded-2xl flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-6xl font-bold mb-4">{t('about.yearsExperience')}</div>
+              <div
+                className="w-full h-80 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: `linear-gradient(135deg, ${colors.goldLight}66, ${colors.silverLight}66)`,
+                  boxShadow: `0 4px 15px ${colors.goldMedium}88`,
+                }}
+              >
+                <div
+                  className="text-white text-center font-extrabold"
+                  style={{
+                    fontSize: '6rem',
+                    color: colors.goldDark,
+                    textShadow: `2px 2px 6px ${colors.silverDark}aa`,
+                  }}
+                >
+                  {t('about.yearsExperience')}
                 </div>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-orange/20 rounded-full blur-xl"></div>
-              <div className="absolute -top-8 -left-8 w-24 h-24 bg-brand-purple/20 rounded-full blur-xl"></div>
+              <div
+                className="absolute -bottom-8 -right-8 rounded-full blur-xl"
+                style={{
+                  width: '8rem',
+                  height: '8rem',
+                  backgroundColor: `${colors.goldLight}33`,
+                  zIndex: -1,
+                }}
+              ></div>
+              <div
+                className="absolute -top-8 -left-8 rounded-full blur-xl"
+                style={{
+                  width: '6rem',
+                  height: '6rem',
+                  backgroundColor: `${colors.goldLight}33`,
+                  zIndex: -1,
+                }}
+              ></div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Vision & Mission */}
-      <section ref={ref} className="section-padding bg-gray-50 dark:bg-gray-800">
+      <section
+        ref={ref}
+        className="section-padding"
+        style={{ backgroundColor: colors.silverLight }}
+      >
         <div className="container-custom">
           <motion.div
             initial="hidden"
-            animate={inView ? "visible" : "hidden"}
+            animate={inView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="grid grid-cols-1 lg:grid-cols-2 gap-12"
           >
             <motion.div
               variants={fadeInUp}
-              className="card p-8 text-center"
+              className="card p-8 text-center rounded-lg shadow"
+              style={{
+                border: `1px solid ${colors.goldMedium}`,
+                backgroundColor: colors.silverLight,
+                color: colors.silverDark,
+              }}
             >
-              <div className="w-16 h-16 bg-brand-gradient rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.silverLight})`,
+                }}
+              >
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: colors.goldDark }}
+              >
                 {t('about.vision.title')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p style={{ color: colors.silverDark }} className="leading-relaxed">
                 {t('about.vision.description')}
               </p>
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="card p-8 text-center"
+              className="card p-8 text-center rounded-lg shadow"
+              style={{
+                border: `1px solid ${colors.goldMedium}`,
+                backgroundColor: colors.silverLight,
+                color: colors.silverDark,
+              }}
             >
-              <div className="w-16 h-16 bg-brand-gradient rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                style={{
+                  background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.silverLight})`,
+                }}
+              >
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: colors.goldDark }}
+              >
                 {t('about.mission.title')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p style={{ color: colors.silverDark }} className="leading-relaxed">
                 {t('about.mission.description')}
               </p>
             </motion.div>
@@ -182,10 +298,20 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('about.values.title')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p
+              className="text-lg max-w-2xl mx-auto"
+              style={{ color: colors.silverDark }}
+            >
               {t('about.values.description', 'القيم التي نؤمن بها وتوجه عملنا اليومي')}
             </p>
           </motion.div>
@@ -199,13 +325,26 @@ const About = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center group"
               >
-                <div className="w-20 h-20 bg-brand-gradient rounded-full flex items-center justify-center mx-auto mb-6 text-white group-hover:scale-110 transition-transform duration-300">
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-white group-hover:scale-110 transition-transform duration-300"
+                  style={{
+                    background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.silverLight})`,
+                  }}
+                >
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: colors.silverDark }}
+                >
                   {t(`about.values.${value.key}`)}
                 </h3>
-                <div className="w-12 h-1 bg-brand-gradient rounded mx-auto"></div>
+                <div
+                  className="w-12 h-1 rounded mx-auto"
+                  style={{
+                    background: `linear-gradient(to right, ${colors.goldDark}, ${colors.silverLight})`,
+                  }}
+                ></div>
               </motion.div>
             ))}
           </div>
@@ -213,7 +352,10 @@ const About = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
+      <section
+        className="section-padding"
+        style={{ backgroundColor: colors.silverLight }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -221,56 +363,46 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              style={{
+                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('about.whyChooseUsTitle')}
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="card p-6 text-center hover-lift"
-            >
-              <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                {t('about.speed')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {t('about.speedDesc')}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="card p-6 text-center hover-lift"
-            >
-              <div className="text-4xl mb-4">💡</div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                {t('about.innovationTitle')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {t('about.innovationDesc')}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="card p-6 text-center hover-lift"
-            >
-              <div className="text-4xl mb-4">🤝</div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                {t('about.partnershipTitle')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {t('about.partnershipDesc')}
-              </p>
-            </motion.div>
+            {[
+              { icon: '🚀', titleKey: 'about.speed', descKey: 'about.speedDesc', delay: 0 },
+              { icon: '💡', titleKey: 'about.innovationTitle', descKey: 'about.innovationDesc', delay: 0.1 },
+              { icon: '🤝', titleKey: 'about.partnershipTitle', descKey: 'about.partnershipDesc', delay: 0.2 },
+            ].map(({ icon, titleKey, descKey, delay }) => (
+              <motion.div
+                key={titleKey}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay }}
+                className="card p-6 text-center hover-lift rounded-lg shadow"
+                style={{
+                  border: `1px solid ${colors.goldMedium}`,
+                  backgroundColor: colors.silverLight,
+                  color: colors.silverDark,
+                }}
+              >
+                <div className="text-4xl mb-4">{icon}</div>
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: colors.goldDark }}
+                >
+                  {t(titleKey)}
+                </h3>
+                <p style={{ color: colors.silverDark }}>{t(descKey)}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
