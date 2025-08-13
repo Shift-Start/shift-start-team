@@ -5,6 +5,15 @@ import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { contactAPI, handleApiError } from '../services/api';
 
+// تعريف الألوان ككائن JS
+const colors = {
+  goldDark: '#bfa951',
+  goldMedium: '#dbba45',
+  goldLight: '#f4d580',
+  silverDark: '#7a6e4e',
+  silverLight: '#f4f1df',
+};
+
 const Contact = () => {
   const { t } = useTranslation();
 
@@ -54,44 +63,49 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.goldDark} stroke={colors.goldMedium} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
       title: t('contact.info.address'),
       value: t('contact.info.addressValue'),
-      color: 'text-brand-red',
+      // هنا نستخدم لون ذهب وسط للنص العنوان
+      titleColor: colors.goldMedium,
+      valueColor: colors.silverDark,
     },
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.silverDark} stroke={colors.goldDark} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       ),
       title: t('contact.info.phone'),
       value: t('contact.info.phoneValue'),
-      color: 'text-brand-pink',
+      titleColor: colors.goldDark,
+      valueColor: colors.silverLight,
     },
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.goldLight} stroke={colors.goldDark} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
       title: t('contact.info.email'),
       value: t('contact.info.emailValue'),
-      color: 'text-brand-purple',
+      titleColor: colors.goldMedium,
+      valueColor: colors.silverDark,
     },
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.silverLight} stroke={colors.goldMedium} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
       title: t('contact.info.hours'),
       value: t('contact.info.hoursValue'),
-      color: 'text-brand-orange',
+      titleColor: colors.goldDark,
+      valueColor: colors.silverLight,
     },
   ];
 
@@ -99,42 +113,42 @@ const Contact = () => {
     {
       name: 'Facebook',
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.goldMedium} viewBox="0 0 24 24">
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-600',
+      colorClass: 'hover:text-[#dbba45]', // goldMedium on hover
     },
     {
       name: 'Twitter',
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.goldLight} viewBox="0 0 24 24">
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-400',
+      colorClass: 'hover:text-[#f4d580]', // goldLight on hover
     },
     {
       name: 'LinkedIn',
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.silverDark} viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-700',
+      colorClass: 'hover:text-[#7a6e4e]', // silverDark on hover
     },
     {
       name: 'Instagram',
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill={colors.goldDark} viewBox="0 0 24 24">
           <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.329-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.412-3.329c.88-.88 2.032-1.297 3.329-1.297s2.448.417 3.329 1.297c.88.88 1.297 2.032 1.297 3.329s-.417 2.448-1.297 3.329c-.88.807-2.032 1.212-3.329 1.212zm7.83-7.83c-.49 0-.88-.39-.88-.88s.39-.88.88-.88.88.39.88.88-.39.88-.88.88zm0 0"/>
         </svg>
       ),
       href: '#',
-      color: 'hover:text-pink-600',
+      colorClass: 'hover:text-[#dbba45]', // goldMedium on hover
     },
   ];
 
@@ -146,7 +160,12 @@ const Contact = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section
+        className="relative py-20"
+        style={{
+          background: `linear-gradient(135deg, ${colors.goldLight}1A, ${colors.goldMedium}1A, ${colors.silverLight}1A)`,
+        }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -154,10 +173,20 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.goldMedium}, ${colors.goldLight})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               {t('contact.title')}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p
+              className="text-xl max-w-3xl mx-auto"
+              style={{ color: colors.silverDark }}
+            >
               {t('contact.subtitle')}
             </p>
           </motion.div>
@@ -176,13 +205,22 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="card p-6 text-center hover-lift"
               >
-                <div className={`w-12 h-12 ${info.color} mx-auto mb-4 flex items-center justify-center`}>
+                <div
+                  className="w-12 h-12 mx-auto mb-4 flex items-center justify-center"
+                  style={{ color: info.titleColor }}
+                >
                   {info.icon}
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <h3
+                  className="font-semibold mb-2"
+                  style={{ color: info.titleColor }}
+                >
                   {info.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm whitespace-pre-line">
+                <p
+                  className="text-sm whitespace-pre-line"
+                  style={{ color: info.valueColor }}
+                >
                   {info.value}
                 </p>
               </motion.div>
@@ -192,7 +230,10 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
+      <section
+        className="section-padding"
+        style={{ backgroundColor: colors.silverLight }}
+      >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -201,15 +242,26 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="card p-8">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <div
+                className="card p-8"
+                style={{ borderColor: colors.goldMedium, borderWidth: 1, borderStyle: 'solid' }}
+              >
+                <h2
+                  className="text-2xl font-bold mb-6"
+                  style={{ color: colors.goldDark }}
+                >
                   {t('contact.form.sendMessageTitle')}
                 </h2>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                  {/* Inputs with gold borders */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: colors.silverDark }}
+                      >
                         {t('contact.form.name')} *
                       </label>
                       <input
@@ -220,12 +272,20 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
+                        style={{
+                          borderColor: colors.goldMedium,
+                          color: colors.silverDark,
+                        }}
                         placeholder={t('contact.form.namePlaceholder')}
                       />
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: colors.silverDark }}
+                      >
                         {t('contact.form.email')} *
                       </label>
                       <input
@@ -236,14 +296,23 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
+                        style={{
+                          borderColor: colors.goldMedium,
+                          color: colors.silverDark,
+                        }}
                         placeholder={t('contact.form.emailPlaceholder')}
                       />
                     </div>
                   </div>
 
+                  {/* باقي الحقول بنفس الأسلوب */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: colors.silverDark }}
+                      >
                         {t('contact.form.phone')}
                       </label>
                       <input
@@ -253,12 +322,20 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         className="form-input"
+                        style={{
+                          borderColor: colors.goldMedium,
+                          color: colors.silverDark,
+                        }}
                         placeholder={t('contact.form.phonePlaceholder')}
                       />
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label
+                        htmlFor="subject"
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: colors.silverDark }}
+                      >
                         {t('contact.form.subject')} *
                       </label>
                       <input
@@ -269,13 +346,21 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="form-input"
+                        style={{
+                          borderColor: colors.goldMedium,
+                          color: colors.silverDark,
+                        }}
                         placeholder={t('contact.form.subjectPlaceholder')}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: colors.silverDark }}
+                    >
                       {t('contact.form.message')} *
                     </label>
                     <textarea
@@ -286,6 +371,10 @@ const Contact = () => {
                       required
                       rows={6}
                       className="form-textarea"
+                      style={{
+                        borderColor: colors.goldMedium,
+                        color: colors.silverDark,
+                      }}
                       placeholder={t('contact.form.messagePlaceholder')}
                     />
                   </div>
@@ -295,7 +384,13 @@ const Contact = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full btn-gradient text-white py-3 px-6 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full py-3 px-6 rounded-lg font-semibold flex items-center justify-center"
+                    style={{
+                      backgroundColor: colors.goldDark,
+                      color: '#fff',
+                      opacity: isSubmitting ? 0.6 : 1,
+                      cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    }}
                   >
                     {isSubmitting ? (
                       <>
@@ -336,8 +431,13 @@ const Contact = () => {
       {/* Social Media Section */}
       <section className="section-padding">
         <div className="container-custom text-center">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">{t('contact.followUs')}</h2>
-          <div className="flex justify-center gap-8 text-gray-600 dark:text-gray-400">
+          <h2
+            className="text-2xl font-semibold mb-6"
+            style={{ color: colors.goldDark }}
+          >
+            {t('contact.followUs')}
+          </h2>
+          <div className="flex justify-center gap-8" style={{ color: colors.silverDark }}>
             {socialLinks.map((social, idx) => (
               <a
                 key={idx}
@@ -345,7 +445,10 @@ const Contact = () => {
                 aria-label={social.name}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-colors duration-300 ${social.color} hover:text-opacity-80`}
+                className="transition-colors duration-300"
+                style={{ color: colors.goldMedium }}
+                onMouseEnter={e => e.currentTarget.style.color = social.colorClass.replace('hover:text-', '')}
+                onMouseLeave={e => e.currentTarget.style.color = colors.goldMedium}
               >
                 {social.icon}
               </a>
