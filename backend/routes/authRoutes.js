@@ -82,4 +82,4 @@ router.get('/me', protect, getMe);
 router.put('/updatedetails', protect, updateDetailsValidation, updateDetails);
 router.put('/updatepassword', protect, updatePasswordValidation, updatePassword);
 
-module.exports = router;
+export default router;

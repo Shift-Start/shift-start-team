@@ -13,6 +13,7 @@ const Team = React.lazy(() => import('./pages/Team'));
 const Projects = React.lazy(() => import('./pages/Projects'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Admin = React.lazy(() => import('./pages/Admin'));
+const Register = React.lazy(() => import('./pages/Register'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin" element={<Admin />} />
+                   <Route path="/Register" element={<Register />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

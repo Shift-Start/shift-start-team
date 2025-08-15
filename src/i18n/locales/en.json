@@ -347,5 +347,22 @@
     "title": "Have a project idea?",
     "description": "We are here to help you turn your ideas into a distinguished digital reality. Contact us today and let's start the success journey together.",
     "button": "Start Your Project Now"
+  },
+  
+  "register": {
+    "title": "Create Account",
+    "subtitle": "Fill in the following details to create a new account",
+    "name": "Name",
+    "name_placeholder": "Enter your full name",
+    "email": "Email",
+    "password": "Password",
+    "create_account": "Create Account",
+    "creating": "Creating account...",
+    "success": "Account created successfully",
+    "failed": "An error occurred while creating the account",
+    "already_have_account": "Already have an account?",
+    "sign_in": "Sign in"
   }
+
+
 }

@@ -12,15 +12,6 @@ const Services = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
-  // استبدال الألوان بتدرجات ذهبي-فضي ناعمة
-  const colors = {
-    goldDark: '#bfa951',
-    goldMedium: '#dbba45',
-    goldLight: '#f4d580',
-    silverDark: '#7a6e4e',
-    silverLight: '#f4f1df',
-  };
-
   const services = [
     {
       key: 'webDevelopment',
@@ -35,7 +26,7 @@ const Services = () => {
         'services.webDevelopment.features.2',
         'services.webDevelopment.features.3',
       ],
-      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
+      gradient: 'from-gold-500 to-silver-300'
     },
     {
       key: 'webDesign',
@@ -50,7 +41,7 @@ const Services = () => {
         'services.webDesign.features.2',
         'services.webDesign.features.3',
       ],
-      color: `from-[${colors.goldLight}] to-[${colors.goldDark}]`,
+      gradient: 'from-gold-300 to-gold-500'
     },
     {
       key: 'mobileApps',
@@ -65,7 +56,7 @@ const Services = () => {
         'services.mobileApps.features.2',
         'services.mobileApps.features.3',
       ],
-      color: `from-[${colors.silverLight}] to-[${colors.silverDark}]`,
+      gradient: 'from-silver-300 to-silver-600'
     },
     {
       key: 'ecommerce',
@@ -80,7 +71,7 @@ const Services = () => {
         'services.ecommerce.features.2',
         'services.ecommerce.features.3',
       ],
-      color: `from-[${colors.goldLight}] to-[${colors.goldDark}]`,
+      gradient: 'from-gold-300 to-gold-500'
     },
     {
       key: 'seo',
@@ -95,7 +86,7 @@ const Services = () => {
         'services.seo.features.2',
         'services.seo.features.3',
       ],
-      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
+      gradient: 'from-gold-500 to-silver-300'
     },
     {
       key: 'maintenance',
@@ -111,7 +102,7 @@ const Services = () => {
         'services.maintenance.features.2',
         'services.maintenance.features.3',
       ],
-      color: `from-[${colors.goldDark}] to-[${colors.silverLight}]`,
+      gradient: 'from-gold-500 to-silver-300'
     },
   ];
 
@@ -177,12 +168,7 @@ const Services = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section
-        className="relative py-20"
-        style={{
-          background: `linear-gradient(135deg, ${colors.goldLight}20, ${colors.silverLight}20, ${colors.goldLight}20)`,
-        }}
-      >
+      <section className="relative py-20 bg-gradient-to-br from-gold-300/10 via-silver-300/10 to-gold-300/10">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -190,17 +176,10 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1
-              className="text-4xl md:text-6xl font-bold mb-6"
-              style={{
-                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gold-500 to-gold-400 text-transparent bg-clip-text">
               {t('services.title')}
             </h1>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: colors.silverDark }}>
+            <p className="text-xl max-w-3xl mx-auto text-silver-600">
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -219,54 +198,27 @@ const Services = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <div
-                  className="card p-8 h-full hover-lift relative overflow-hidden rounded-lg shadow-md"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.silverLight}, ${colors.goldLight})`,
-                    border: `1px solid ${colors.goldMedium}`,
-                  }}
-                >
+                <div className="card p-8 h-full hover-lift relative overflow-hidden rounded-lg shadow-md bg-gradient-to-br from-silver-300 to-gold-300 border border-gold-400">
                   {/* Background gradient */}
-                  <div
-                    className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.goldDark}, ${colors.silverLight})`,
-                      zIndex: 0,
-                    }}
-                  ></div>
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg bg-gradient-to-br ${service.gradient} z-0`}></div>
 
                   <div className="relative z-10">
-                    <div
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white"
-                      style={{
-                        background: `linear-gradient(90deg, ${colors.goldDark}, ${colors.silverLight})`,
-                      }}
-                    >
+                    <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white bg-gradient-to-r from-gold-500 to-silver-300">
                       {service.icon}
                     </div>
 
-                    <h3
-                      className="text-2xl font-bold mb-4"
-                      style={{ color: colors.silverDark }}
-                    >
+                    <h3 className="text-2xl font-bold mb-4 text-silver-600">
                       {t(`services.${service.key}.title`)}
                     </h3>
 
-                    <p className="mb-6 leading-relaxed" style={{ color: '#7a6e4e' }}>
+                    <p className="mb-6 leading-relaxed text-silver-600">
                       {t(`services.${service.key}.description`)}
                     </p>
 
                     <div className="space-y-2">
                       {service.featuresKeys.map((featureKey, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center text-sm"
-                          style={{ color: '#8c7d36' }}
-                        >
-                          <div
-                            className="w-2 h-2 rounded-full mr-3 rtl:ml-3 rtl:mr-0"
-                            style={{ backgroundColor: colors.goldDark }}
-                          ></div>
+                        <div key={idx} className="flex items-center text-sm text-gold-600">
+                          <div className="w-2 h-2 rounded-full mr-3 rtl:ml-3 rtl:mr-0 bg-gold-500"></div>
                           {t(featureKey)}
                         </div>
                       ))}
@@ -280,10 +232,7 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section
-        className="section-padding"
-        style={{ backgroundColor: colors.silverLight }}
-      >
+      <section className="section-padding bg-silver-300/20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -291,17 +240,10 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{
-                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gold-500 to-gold-400 text-transparent bg-clip-text">
               {t('services.process.title')}
             </h2>
-            <p style={{ color: colors.silverDark }} className="text-lg max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto text-silver-600">
               {t('services.process.subtitle')}
             </p>
           </motion.div>
@@ -315,19 +257,9 @@ const Services = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                <div
-                  className="card p-6 text-center hover-lift h-full rounded-lg shadow"
-                  style={{
-                    border: `1px solid ${colors.goldMedium}`,
-                    backgroundColor: colors.silverLight,
-                    color: colors.silverDark,
-                  }}
-                >
+                <div className="card p-6 text-center hover-lift h-full rounded-lg shadow border border-gold-400 bg-silver-300/20 text-silver-600">
                   <div className="text-4xl mb-4">{step.icon}</div>
-                  <div
-                    className="text-sm font-bold mb-2"
-                    style={{ color: colors.goldDark }}
-                  >
+                  <div className="text-sm font-bold mb-2 text-gold-500">
                     {step.step}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">
@@ -338,12 +270,7 @@ const Services = () => {
 
                 {/* Connector line */}
                 {index < process.length - 1 && (
-                  <div
-                    className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 rounded"
-                    style={{
-                      background: `linear-gradient(to right, ${colors.goldDark}, ${colors.silverLight})`,
-                    }}
-                  ></div>
+                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 rounded bg-gradient-to-r from-gold-500 to-silver-300"></div>
                 )}
               </motion.div>
             ))}
@@ -360,17 +287,10 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{
-                background: `linear-gradient(to right, ${colors.goldDark}, ${colors.goldMedium})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gold-500 to-gold-400 text-transparent bg-clip-text">
               {t('services.technologies.title')}
             </h2>
-            <p style={{ color: colors.silverDark }} className="text-lg max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto text-silver-600">
               {t('services.technologies.subtitle')}
             </p>
           </motion.div>
@@ -382,12 +302,7 @@ const Services = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="card p-4 text-center hover-lift rounded-lg shadow"
-                style={{
-                  border: `1px solid ${colors.goldMedium}`,
-                  color: colors.silverDark,
-                  backgroundColor: colors.silverLight,
-                }}
+                className="card p-4 text-center hover-lift rounded-lg shadow border border-gold-400 text-silver-600 bg-silver-300/20"
               >
                 <div className="text-sm font-medium">{t(techKey)}</div>
               </motion.div>
@@ -397,13 +312,7 @@ const Services = () => {
       </section>
 
       {/* Call to Action */}
-      <section
-        className="section-padding text-white rounded-lg"
-        style={{
-          background: `linear-gradient(90deg, ${colors.goldMedium}, ${colors.silverLight})`,
-          boxShadow: `0 4px 10px ${colors.goldMedium}80`,
-        }}
-      >
+      <section className="section-padding text-white rounded-lg bg-gradient-to-r from-gold-400 to-silver-300 shadow-lg shadow-gold-400/50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -416,13 +325,13 @@ const Services = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white text-[#bfa951] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+                className="bg-white text-gold-500 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
               >
                 {t('services.cta.startProject')}
               </Link>
               <Link
                 to="/projects"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#bfa951] transition-all duration-300 inline-block"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gold-500 transition-all duration-300 inline-block"
               >
                 {t('services.cta.viewProjects')}
               </Link>

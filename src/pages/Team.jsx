@@ -11,111 +11,64 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchTeamMembers = async () => {
-      try {
-        setLoading(true);
-        const response = await teamAPI.getAll();
-        setTeamMembers(response.data.data || []);
-        setError(null);
-      } catch (err) {
-        const errorInfo = handleApiError(err);
-        setError(errorInfo.message);
-        setTeamMembers([
-          {
-            id: 1,
-            nameKey: 'team.members.ahmed.name',
-            role: 'fullstack',
-            bioKey: 'team.members.ahmed.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['React', 'Node.js', 'MongoDB', 'TypeScript'],
-            social: {
-              github: 'https://github.com',
-              linkedin: 'https://linkedin.com',
-              twitter: 'https://twitter.com',
-            },
+  // دالة لتحميل أعضاء الفريق
+  const fetchTeamMembers = async () => {
+    try {
+      setLoading(true);
+      const response = await teamAPI.getAll();
+      setTeamMembers(response.data.data || []);
+      setError(null);
+    } catch (err) {
+      const errorInfo = handleApiError(err);
+      setError(errorInfo.message);
+      // البيانات الافتراضية عند الخطأ - يمكن إزالتها أو تعديلها حسب الحاجة
+      setTeamMembers([
+        {
+          id: 1,
+          nameKey: 'team.members.ahmed.name',
+          role: 'fullstack',
+          bioKey: 'team.members.ahmed.bio',
+          image: '/api/placeholder/300/300',
+          skills: ['React', 'Node.js', 'MongoDB', 'TypeScript'],
+          social: {
+            github: 'https://github.com',
+            linkedin: 'https://linkedin.com',
+            twitter: 'https://twitter.com',
           },
-          {
-            id: 2,
-            nameKey: 'team.members.fatima.name',
-            role: 'ui',
-            bioKey: 'team.members.fatima.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['Figma', 'Sketch', 'Adobe XD', 'Prototyping'],
-            social: {
-              dribbble: 'https://dribbble.com',
-              behance: 'https://behance.com',
-              linkedin: 'https://linkedin.com',
-            },
+        },
+        {
+          id: 2,
+          nameKey: 'team.members.fatima.name',
+          role: 'ui',
+          bioKey: 'team.members.fatima.bio',
+          image: '/api/placeholder/300/300',
+          skills: ['Figma', 'Sketch', 'Adobe XD', 'Prototyping'],
+          social: {
+            dribbble: 'https://dribbble.com',
+            behance: 'https://behance.com',
+            linkedin: 'https://linkedin.com',
           },
-          {
-            id: 3,
-            nameKey: 'team.members.mohammed.name',
-            role: 'backend',
-            bioKey: 'team.members.mohammed.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['Python', 'Django', 'PostgreSQL', 'Docker'],
-            social: {
-              github: 'https://github.com',
-              linkedin: 'https://linkedin.com',
-            },
-          },
-          {
-            id: 4,
-            nameKey: 'team.members.sara.name',
-            role: 'frontend',
-            bioKey: 'team.members.sara.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['Vue.js', 'Nuxt.js', 'TailwindCSS', 'JavaScript'],
-            social: {
-              github: 'https://github.com',
-              linkedin: 'https://linkedin.com',
-              twitter: 'https://twitter.com',
-            },
-          },
-          {
-            id: 5,
-            nameKey: 'team.members.omar.name',
-            role: 'manager',
-            bioKey: 'team.members.omar.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['Project Management', 'Agile', 'Scrum', 'Leadership'],
-            social: {
-              linkedin: 'https://linkedin.com',
-              twitter: 'https://twitter.com',
-            },
-          },
-          {
-            id: 6,
-            nameKey: 'team.members.layla.name',
-            role: 'ux',
-            bioKey: 'team.members.layla.bio',
-            image: '/api/placeholder/300/300',
-            skills: ['User Research', 'Wireframing', 'Usability Testing', 'Analytics'],
-            social: {
-              linkedin: 'https://linkedin.com',
-              behance: 'https://behance.com',
-            },
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchTeamMembers();
   }, []);
 
   const getRoleColor = (role) => {
     const colors = {
-      fullstack: 'from-[#bfa951] to-[#7a6e4e]',     // ذهبي غامق -> بني
-      frontend: 'from-[#d6c683] to-[#a18e30]',     // ذهبي متوسط -> ذهبي داكن
-      backend: 'from-[#c1a65c] to-[#8c7d36]',      // ذهبي فاتح -> ذهبي متوسط
-      ui: 'from-[#d4b86a] to-[#ad9b51]',           // ذهبي ناعم
-      ux: 'from-[#bba856] to-[#7c6f3f]',           // ذهبي داكن
-      manager: 'from-[#8f8c7f] to-[#595744]',      // رمادي معدني
+      fullstack: 'from-gold-500 to-gold-700',
+      frontend: 'from-gold-300 to-gold-500',
+      backend: 'from-gold-400 to-gold-600',
+      ui: 'from-gold-300 to-silver-400',
+      ux: 'from-silver-400 to-silver-600',
+      manager: 'from-silver-500 to-silver-700',
     };
-    return colors[role] || 'from-[#a18e30] to-[#7a6e4e]'; // لون افتراضي ذهبي
+    return colors[role] || 'from-gold-400 to-gold-600';
   };
 
   const getSocialIcon = (platform) => {
@@ -135,11 +88,6 @@ const Team = () => {
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
         </svg>
       ),
-      dribbble: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.816zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.45C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z" />
-        </svg>
-      ),
       behance: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z" />
@@ -153,6 +101,15 @@ const Team = () => {
     return <LoadingSpinner />;
   }
 
+  // إذا حدث خطأ، نعرض رسالة واضحة
+  if (error) {
+    return (
+      <div className="text-center py-16 text-red-600 text-xl font-semibold">
+        {error}
+      </div>
+    );
+  }
+
   return (
     <>
       <Helmet>
@@ -160,8 +117,8 @@ const Team = () => {
         <meta name="description" content={t('seo.team.description')} />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#ecd09c]/20 via-[#f4d580]/20 to-[#dbba45]/20">
+      {/* قسم hero */}
+      <section className="relative py-20 bg-gradient-to-br from-gold-300/20 via-gold-400/20 to-gold-500/20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -172,22 +129,21 @@ const Team = () => {
             <h1
               className="text-4xl md:text-6xl font-bold mb-6"
               style={{
-                background:
-                  'linear-gradient(to right, #bfa951, #dbba45)',
+                background: 'linear-gradient(to right, #d4af37, #f0c419)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
             >
               {t('team.title')}
             </h1>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#7a6e4e' }}>
+            <p className="text-xl max-w-3xl mx-auto text-gold-700">
               {t('team.subtitle')}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Team Grid */}
+      {/* فريق العمل */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -199,16 +155,16 @@ const Team = () => {
                 transition={{ delay: index * 0.15 }}
                 className="group"
               >
-                <div className="card p-6 text-center hover-lift relative overflow-hidden bg-gradient-to-br from-[#f4f1df] to-[#dbd3a5] rounded-lg shadow-md">
-                  {/* Background gradient on hover */}
+                <div className="card p-6 text-center hover-lift relative overflow-hidden bg-gradient-to-br from-gold-50 to-gold-100 rounded-lg shadow-md">
+                  {/* ظل خلفي */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${getRoleColor(
                       member.role
-                    )} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-lg`}
+                    )} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
                   ></div>
 
+                  {/* الصورة والسيرة */}
                   <div className="relative z-10">
-                    {/* Image or placeholder circle */}
                     <div className="relative mb-6">
                       <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:scale-105 transition-transform duration-300">
                         {member.image ? (
@@ -218,8 +174,8 @@ const Team = () => {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
-                            <span className="text-4xl font-bold text-gray-600 dark:text-gray-300">
+                          <div className="w-full h-full bg-gradient-to-br from-silver-300 to-silver-400 flex items-center justify-center">
+                            <span className="text-4xl font-bold text-silver-600">
                               {t(member.nameKey).charAt(0)}
                             </span>
                           </div>
@@ -227,25 +183,26 @@ const Team = () => {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2" style={{ color: '#7a6e4e' }}>
+                    {/* الاسم */}
+                    <h3 className="text-xl font-bold mb-2 text-gold-700">
                       {t(member.nameKey)}
                     </h3>
-                    <p
-                      className="mb-4 leading-relaxed min-h-[70px]"
-                      style={{ color: '#9f966d' }}
-                    >
+                    {/* نبذة */}
+                    <p className="mb-4 leading-relaxed min-h-[70px] text-gold-600">
                       {t(member.bioKey)}
                     </p>
+                    {/* المهارات */}
                     <div className="mb-4 flex flex-wrap justify-center gap-2">
                       {member.skills.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-[#f7f4e8] text-[#7a6e4e] text-xs rounded-full"
+                          className="px-3 py-1 bg-gold-100 text-gold-700 text-xs rounded-full"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
+                    {/* روابط التواصل */}
                     <div className="flex justify-center space-x-4">
                       {member.social &&
                         Object.entries(member.social).map(([platform, url]) => (
@@ -254,7 +211,7 @@ const Team = () => {
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 bg-[#f4e68c] hover:bg-[#a18e30] text-[#7a6e4e] hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                            className="w-10 h-10 bg-gold-300 hover:bg-gold-600 text-gold-700 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
                             aria-label={platform}
                           >
                             {getSocialIcon(platform)}
@@ -269,8 +226,8 @@ const Team = () => {
         </div>
       </section>
 
-      {/* Join Us Section */}
-      <section className="section-padding" style={{ backgroundColor: '#f4eac1' }}>
+      {/* قسم الانضمام */}
+      <section className="section-padding bg-gold-50">
         <div className="container-custom text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -278,8 +235,7 @@ const Team = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-6"
             style={{
-              background:
-                'linear-gradient(to right, #bfa951, #dbba45)',
+              background: 'linear-gradient(to right, #d4af37, #f0c419)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}
@@ -290,17 +246,16 @@ const Team = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="max-w-2xl mx-auto mb-8"
-            style={{ color: '#7a6e4e' }}
+            className="max-w-2xl mx-auto mb-8 text-gold-700"
           >
             {t('team.joinUs.description')}
           </motion.p>
+          {/* تفاصيل الانضمام */}
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-semibold mb-2"
-            style={{ color: '#7a6e4e' }}
+            className="font-semibold mb-2 text-gold-700"
           >
             {t('team.joinUs.creativeEnvironment.title')}
           </motion.h3>
@@ -308,22 +263,17 @@ const Team = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-sm mb-8"
-            style={{ color: '#9f966d' }}
+            className="text-sm mb-8 text-gold-600"
           >
             {t('team.joinUs.creativeEnvironment.desc')}
           </motion.p>
 
+          {/* زر إرسال البريد الإلكتروني */}
           <motion.a
             href="mailto:careers@shiftstart.sy"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 rounded-lg font-semibold text-lg inline-block"
-            style={{
-              background: 'linear-gradient(90deg, #bfa951, #dbba45)',
-              color: 'white',
-              boxShadow: '0 4px 10px rgba(219, 186, 69, 0.6)',
-            }}
+            className="px-8 py-4 rounded-lg font-semibold text-lg inline-block bg-gradient-to-r from-gold-500 to-gold-400 text-white shadow-lg shadow-gold-400/30"
           >
             {t('team.joinUs.sendCV')}
           </motion.a>

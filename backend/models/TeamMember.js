@@ -128,5 +128,4 @@ teamMemberSchema.statics.getByRole = function(role) {
 teamMemberSchema.statics.getActiveMembers = function() {
   return this.find({ isActive: true }).sort({ order: 1 });
 };
-
-module.exports = mongoose.model('TeamMember', teamMemberSchema);
+export default mongoose.model('TeamMember', teamMemberSchema);

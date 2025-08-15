@@ -24,7 +24,7 @@ module.exports = {
           DEFAULT: '#d4af37',
           300: '#f4d35e',
           400: '#f0c419',
-          500: '#d4af37', // اللون الذهبي الأساسي
+          500: '#d4af37',
           600: '#b88a0d',
           700: '#9b7a0c',
         },
@@ -59,13 +59,6 @@ module.exports = {
           800: '#9a3412',
           900: '#7c2d12',
         },
-        brand: {
-          red: '#FF3C6E',
-          pink: '#D22E9C',
-          purple: '#8C1CCB',
-          orange: '#FF6A3D',
-          dark: '#1C1C1E',
-        },
       },
       fontFamily: {
         arabic: ['Noto Sans Arabic', 'Arial', 'sans-serif'],
@@ -99,8 +92,6 @@ module.exports = {
         'gold-silver-gradient': 'linear-gradient(135deg, #d4af37 0%, #c0c0c0 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'brand-gradient': 'linear-gradient(135deg, #FF3C6E 0%, #D22E9C 50%, #8C1CCB 100%)',
-        'brand-gradient-soft': 'linear-gradient(135deg, rgba(255,60,110,0.1) 0%, rgba(210,46,156,0.1) 50%, rgba(140,28,203,0.1) 100%)',
       },
       backdropBlur: {
         xs: '2px',
