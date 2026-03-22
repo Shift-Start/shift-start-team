@@ -142,4 +142,4 @@ process.on('SIGTERM', () => {
   });
 });
 
-module.exports = app;
+export default app;

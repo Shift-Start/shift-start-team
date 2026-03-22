@@ -181,4 +181,4 @@ projectSchema.methods.incrementViews = function() {
   return this.save();
 };
 
-module.exports = mongoose.model('Project', projectSchema);
+export default mongoose.model('Project', projectSchema);
