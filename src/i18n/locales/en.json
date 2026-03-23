@@ -8,8 +8,8 @@
     "services": "Services"
   },
   "hero": {
-    "title": "A Shift in Development",
-    "subtitle": "Shift Start team specialized in web development and design using cutting-edge technologies",
+    "title": "A New Version of Innovation",
+    "subtitle": "Version AI team specialized in software development and web design using cutting-edge technologies and AI",
     "description": "We are a passionate technology team, providing innovative solutions and attractive designs that meet our clients' needs and achieve their digital goals",
     "cta": "Contact Us",
     "learnMore": "Learn More"
@@ -17,7 +17,7 @@
   "about": {
     "title": "About Us",
     "subtitle": "Professional team specialized in development",
-    "description": "We are Shift Start team, a group of creative developers and designers who strive to provide the best technical solutions. We believe that every project is a new beginning and an opportunity for creativity and excellence.",
+    "description": "We are Version AI team, a group of creative developers and designers who strive to provide the best technical solutions. We believe that every project is a new beginning and an opportunity for creativity and excellence.",
     "vision": {
       "title": "Our Vision",
       "description": "To be the first choice for companies and individuals seeking excellence in the digital world"
@@ -111,7 +111,7 @@
     }
   },
   "footer": {
-    "description": "Shift Start team - A shift in the world of development and design",
+    "description": "Version AI team - Professional software development with cutting-edge technologies and AI",
     "quickLinks": "Quick Links",
     "services": "Our Services",
     "contact": "Contact Information",
@@ -141,24 +141,24 @@
   },
   "seo": {
     "home": {
-      "title": "Shift Start | Web Development Team",
-      "description": "Shift Start team for web development and design. We provide design and development services with high professionalism."
+      "title": "Version AI | Professional Software Development Team",
+      "description": "Version AI team for professional software development. We provide design and development services with cutting-edge technologies and AI."
     },
     "about": {
-      "title": "About Us - Shift Start",
-      "description": "Learn about Shift Start team, a group of creative developers and designers specialized in web development."
+      "title": "About Us - Version AI",
+      "description": "Learn about Version AI team, a group of creative developers and designers specialized in software development."
     },
     "team": {
-      "title": "Our Team - Shift Start",
-      "description": "Meet the outstanding members of Shift Start team of experienced and highly skilled developers and designers."
+      "title": "Our Team - Version AI",
+      "description": "Meet the outstanding members of Version AI team of experienced and highly skilled developers and designers."
     },
     "projects": {
-      "title": "Our Projects - Shift Start",
-      "description": "Browse a collection of the best projects by Shift Start team in web development and application design."
+      "title": "Our Projects - Version AI",
+      "description": "Browse a collection of the best projects by Version AI team in software development and application design."
     },
     "contact": {
-      "title": "Contact Us - Shift Start",
-      "description": "Contact Shift Start team to discuss your next project in web development and design."
+      "title": "Contact Us - Version AI",
+      "description": "Contact Version AI team to discuss your next project in software development and design."
     }
   },
   "admin": {

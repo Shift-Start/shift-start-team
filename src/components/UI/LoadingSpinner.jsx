@@ -17,7 +17,7 @@ const LoadingSpinner = ({ size = 'default', text = true }) => {
         <div className={`${sizeClasses[size]} border-4 border-gray-200 dark:border-gray-700 rounded-full`}></div>
         
         {/* Inner spinning ring */}
-        <div className={`${sizeClasses[size]} border-4 border-transparent border-t-brand-red border-r-brand-pink rounded-full animate-spin absolute top-0 left-0`}></div>
+        <div className={`${sizeClasses[size]} border-4 border-transparent border-t-brand-blue border-r-brand-cyan rounded-full animate-spin absolute top-0 left-0`}></div>
         
         {/* Center dot */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

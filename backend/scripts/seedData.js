@@ -21,13 +21,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 const users = [
   {
     name: 'Admin User',
-    email: 'admin@shiftstart.sy',
+    email: 'admin@versionai.dev',
     password: 'Admin123!@#',
     role: 'admin'
   },
   {
     name: 'Test User',
-    email: 'user@shiftstart.sy',
+    email: 'user@versionai.dev',
     password: 'User123!@#',
     role: 'user'
   }
@@ -138,8 +138,8 @@ const projects = [
     category: 'ecommerce',
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redux', 'Express'],
     links: {
-      live: 'https://demo-ecommerce.shiftstart.sy',
-      github: 'https://github.com/shiftstart/ecommerce-demo'
+      live: 'https://demo-ecommerce.versionai.sy',
+      github: 'https://github.com/versionai/ecommerce-demo'
     },
     client: {
       name: 'TechMart',
@@ -178,7 +178,7 @@ const projects = [
     category: 'corporate',
     technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'Strapi'],
     links: {
-      live: 'https://demo-corporate.shiftstart.sy'
+      live: 'https://demo-corporate.versionai.sy'
     },
     client: {
       name: 'InnovateTech',
@@ -217,8 +217,8 @@ const projects = [
     category: 'website',
     technologies: ['Vue.js', 'Node.js', 'Socket.io', 'PostgreSQL', 'Redis'],
     links: {
-      live: 'https://demo-tasks.shiftstart.sy',
-      github: 'https://github.com/shiftstart/task-manager'
+      live: 'https://demo-tasks.versionai.sy',
+      github: 'https://github.com/versionai/task-manager'
     },
     duration: '4 months',
     status: 'completed',

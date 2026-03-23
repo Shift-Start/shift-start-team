@@ -35,7 +35,7 @@ const sendNotificationEmail = async (contactData) => {
       subject: `New Contact Form Submission - ${contactData.subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #FF3C6E;">New Contact Form Submission</h2>
+          <h2 style="color: #2979FF;">New Contact Form Submission</h2>
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #333; margin-top: 0;">Contact Details</h3>
             <p><strong>Name:</strong> ${contactData.name}</p>
@@ -76,9 +76,9 @@ const sendAutoReplyEmail = async (contactData) => {
       subject: 'شكراً لتواصلك معنا - Thank you for contacting us',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #FF3C6E, #8C1CCB);">
-            <h1 style="color: white; margin: 0;">Shift Start</h1>
-            <p style="color: white; margin: 10px 0 0;">نقطة تحول</p>
+          <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #2979FF, #7C4DFF);">
+            <h1 style="color: white; margin: 0;">Version AI</h1>
+            <p style="color: white; margin: 10px 0 0;">Version AI</p>
           </div>
           
           <div style="padding: 30px 20px; background: #fff;">
@@ -102,7 +102,7 @@ const sendAutoReplyEmail = async (contactData) => {
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://shiftstart.sy" style="background: linear-gradient(135deg, #FF3C6E, #8C1CCB); color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; display: inline-block;">
+              <a href="https://versionai.dev" style="background: linear-gradient(135deg, #2979FF, #7C4DFF); color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; display: inline-block;">
                 زيارة موقعنا - Visit Our Website
               </a>
             </div>
@@ -110,10 +110,10 @@ const sendAutoReplyEmail = async (contactData) => {
           
           <div style="padding: 20px; background: #f8f9fa; text-align: center; color: #666; font-size: 14px;">
             <p style="margin: 0;">
-              Shift Start - نقطة تحول<br>
+              Version AI<br>
               Professional Web Development Team<br>
-              <a href="mailto:info@shiftstart.sy" style="color: #FF3C6E;">info@shiftstart.sy</a> | 
-              <a href="https://shiftstart.sy" style="color: #FF3C6E;">www.shiftstart.sy</a>
+              <a href="mailto:info@versionai.dev" style="color: #2979FF;">info@versionai.dev</a> | 
+              <a href="https://versionai.dev" style="color: #2979FF;">www.versionai.dev</a>
             </p>
           </div>
         </div>

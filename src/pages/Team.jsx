@@ -2,16 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { teamAPI, handleApiError } from '../services/api';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
 
 const Team = () => {
   const { t } = useTranslation();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
+  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.05 });
+  const [joinRef, joinInView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  // Fetch team members from API
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
@@ -22,7 +37,6 @@ const Team = () => {
       } catch (err) {
         const errorInfo = handleApiError(err);
         setError(errorInfo.message);
-        // Fallback to sample data if API fails
         setTeamMembers([
     {
       id: 1,
@@ -132,6 +146,18 @@ const Team = () => {
     return colors[role] || 'from-gray-500 to-gray-700';
   };
 
+  const getRoleGlow = (role) => {
+    const glows = {
+      fullstack: 'group-hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]',
+      frontend: 'group-hover:shadow-[0_0_30px_rgba(34,197,94,0.15)]',
+      backend: 'group-hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]',
+      ui: 'group-hover:shadow-[0_0_30px_rgba(236,72,153,0.15)]',
+      ux: 'group-hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]',
+      manager: 'group-hover:shadow-[0_0_30px_rgba(107,114,128,0.15)]',
+    };
+    return glows[role] || '';
+  };
+
   const getSocialIcon = (platform) => {
     const icons = {
       github: (
@@ -163,7 +189,6 @@ const Team = () => {
     return icons[platform] || null;
   };
 
-  // Show loading spinner while fetching data
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -176,53 +201,81 @@ const Team = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
-        <div className="container-custom">
+      <section className="relative py-24 md:py-32 overflow-hidden dark:bg-[#0a0e1a]">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/5 via-white to-brand-purple/5 dark:from-brand-cyan/5 dark:via-[#0a0e1a] dark:to-brand-purple/5"></div>
+        <div className="absolute inset-0 grid-bg"></div>
+
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-[10%] w-72 h-72 bg-brand-cyan/10 dark:bg-brand-cyan/5 rounded-full blur-3xl blob animate-float"></div>
+          <div className="absolute bottom-1/4 right-[10%] w-80 h-80 bg-brand-purple/10 dark:bg-brand-purple/5 rounded-full blur-3xl blob animate-float-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl animate-pulse-glow"></div>
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <motion.div variants={fadeInUp} className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 dark:bg-brand-cyan/10 border border-brand-blue/20 dark:border-brand-cyan/20 text-brand-blue dark:text-brand-cyan text-sm font-medium">
+                <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                {t('team.title')}
+              </span>
+            </motion.div>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 gradient-text-animate"
+            >
               {t('team.title')}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            >
               {t('team.subtitle')}
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Team Grid */}
-      <section className="section-padding">
+      <section ref={gridRef} className="section-padding dark:bg-[#0a0e1a] section-dark-mesh relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
+          <motion.div
+            initial="hidden"
+            animate={gridInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {teamMembers.map((member) => (
               <motion.div
                 key={member.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                variants={fadeInUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 className="group"
               >
-                <div className="card p-6 text-center hover-lift relative overflow-hidden">
-                  {/* Background gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${getRoleColor(member.role)} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                  
+                <div className={`card p-6 text-center hover-glow relative overflow-hidden transition-all duration-500 dark:border-[#1e293b] dark:hover:border-brand-cyan/30 ${getRoleGlow(member.role)}`}>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${getRoleColor(member.role)} opacity-0 group-hover:opacity-[0.03] dark:group-hover:opacity-[0.06] transition-opacity duration-500`}></div>
+
                   <div className="relative z-10">
                     {/* Profile Image */}
                     <div className="relative mb-6">
-                      <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:scale-105 transition-transform duration-300">
-                        <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
+                      <motion.div
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-[#1e293b] shadow-xl relative"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
                           <span className="text-4xl font-bold text-gray-600 dark:text-gray-300">
                             {(member.name?.ar || member.name || member.nameEn)?.charAt(0)}
                           </span>
                         </div>
-                      </div>
-                      
-                      {/* Role Badge */}
-                      <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getRoleColor(member.role)}`}>
+                      </motion.div>
+
+                      <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getRoleColor(member.role)} shadow-lg`}>
                         {t(`team.roles.${member.role}`)}
                       </div>
                     </div>
@@ -233,7 +286,7 @@ const Team = () => {
                     </h3>
 
                     {/* Bio */}
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed text-sm">
                       {member.bio?.ar || member.bio || member.bioEn}
                     </p>
 
@@ -242,7 +295,7 @@ const Team = () => {
                       {member.skills.map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full"
+                          className="tech-badge text-xs"
                         >
                           {skill}
                         </span>
@@ -250,69 +303,88 @@ const Team = () => {
                     </div>
 
                     {/* Social Links */}
-                    <div className="flex justify-center space-x-4 rtl:space-x-reverse">
+                    <div className="flex justify-center space-x-3 rtl:space-x-reverse">
                       {Object.entries(member.social).map(([platform, url]) => (
-                        <a
+                        <motion.a
                           key={platform}
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-gray-100 dark:bg-gray-700 hover:bg-brand-red dark:hover:bg-brand-red text-gray-600 dark:text-gray-400 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                          whileHover={{ scale: 1.2, y: -2 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-10 h-10 bg-gray-100 dark:bg-[#1a2332] hover:bg-brand-blue dark:hover:bg-brand-cyan/20 text-gray-600 dark:text-gray-400 hover:text-white dark:hover:text-brand-cyan rounded-xl flex items-center justify-center transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]"
                         >
                           {getSocialIcon(platform)}
-                        </a>
+                        </motion.a>
                       ))}
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Join Us Section */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
-        <div className="container-custom">
+      <section ref={joinRef} className="section-padding dark:bg-[#0a0e1a] relative overflow-hidden">
+        <div className="absolute inset-0 grid-bg"></div>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-[20%] w-64 h-64 bg-brand-purple/5 rounded-full blur-3xl blob animate-float-slow"></div>
+          <div className="absolute bottom-0 left-[20%] w-72 h-72 bg-brand-cyan/5 rounded-full blur-3xl blob animate-float" style={{ animationDelay: '3s' }}></div>
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate={joinInView ? "visible" : "hidden"}
+            variants={staggerContainer}
             className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
-              انضم إلى فريقنا
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              نحن دائماً نبحث عن مواهب جديدة للانضمام إلى فريقنا. إذا كنت شغوفاً بالتكنولوجيا ومهتماً بالتطوير، تواصل معنا.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🚀</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">بيئة إبداعية</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">نوفر بيئة عمل محفزة للإبداع والابتكار</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-2">📚</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">تطوير مستمر</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">فرص للتعلم وتطوير المهارات باستمرار</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-2">🤝</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">عمل جماعي</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">فريق متعاون ومتفهم يدعم بعضه البعض</p>
-              </div>
-            </div>
-
-            <motion.a
-              href="mailto:careers@shiftstart.sy"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg inline-block"
+            <motion.div
+              variants={fadeInUp}
+              className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-xl rounded-3xl p-10 md:p-16 border border-gray-200/50 dark:border-[#1e293b]/50 hover-glow"
             >
-              أرسل سيرتك الذاتية
-            </motion.a>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-animate">
+                انضم إلى فريقنا
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                نحن دائماً نبحث عن مواهب جديدة للانضمام إلى فريقنا. إذا كنت شغوفاً بالتكنولوجيا ومهتماً بالتطوير، تواصل معنا.
+              </p>
+
+              <motion.div
+                initial="hidden"
+                animate={joinInView ? "visible" : "hidden"}
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+              >
+                {[
+                  { emoji: '🚀', title: 'بيئة إبداعية', desc: 'نوفر بيئة عمل محفزة للإبداع والابتكار' },
+                  { emoji: '📚', title: 'تطوير مستمر', desc: 'فرص للتعلم وتطوير المهارات باستمرار' },
+                  { emoji: '🤝', title: 'عمل جماعي', desc: 'فريق متعاون ومتفهم يدعم بعضه البعض' },
+                ].map((perk, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={fadeInUp}
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    className="text-center p-6 rounded-2xl bg-white/60 dark:bg-[#0a0e1a]/60 border border-gray-200/30 dark:border-[#1e293b]/50 hover:border-brand-cyan/20 dark:hover:border-brand-cyan/20 transition-all duration-300"
+                  >
+                    <div className="text-4xl mb-3">{perk.emoji}</div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{perk.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{perk.desc}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <motion.a
+                href="mailto:careers@versionai.dev"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-gradient text-white px-10 py-4 rounded-xl font-semibold text-lg inline-block shadow-lg hover:shadow-2xl transition-all duration-500"
+              >
+                <span className="relative z-10">أرسل سيرتك الذاتية</span>
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
       </section>

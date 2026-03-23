@@ -2,8 +2,22 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import toast from 'react-hot-toast';
 import { contactAPI, handleApiError } from '../services/api';
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -15,6 +29,9 @@ const Contact = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cardsRef, cardsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,12 +46,11 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Send data to backend
       const response = await contactAPI.submit({
         ...formData,
-        category: 'general' // Default category
+        category: 'general'
       });
-      
+
       toast.success(response.data.message || t('contact.form.success'));
       setFormData({
         name: '',
@@ -61,7 +77,7 @@ const Contact = () => {
       ),
       title: t('contact.info.address'),
       value: 'دمشق، سوريا\nشارع الثورة - المالكي',
-      color: 'text-brand-red',
+      gradient: 'from-cyan-500 to-blue-500',
     },
     {
       icon: (
@@ -71,7 +87,7 @@ const Contact = () => {
       ),
       title: t('contact.info.phone'),
       value: '+963 XXX XXX XXX\n+963 YYY YYY YYY',
-      color: 'text-brand-pink',
+      gradient: 'from-blue-500 to-purple-500',
     },
     {
       icon: (
@@ -80,8 +96,8 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.email'),
-      value: 'info@shiftstart.sy\nsupport@shiftstart.sy',
-      color: 'text-brand-purple',
+      value: 'info@versionai.dev\nsupport@versionai.dev',
+      gradient: 'from-purple-500 to-indigo-500',
     },
     {
       icon: (
@@ -91,7 +107,7 @@ const Contact = () => {
       ),
       title: t('contact.info.hours'),
       value: 'السبت - الخميس\n9:00 ص - 6:00 م',
-      color: 'text-brand-orange',
+      gradient: 'from-indigo-500 to-cyan-500',
     },
   ];
 
@@ -104,7 +120,6 @@ const Contact = () => {
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-600',
     },
     {
       name: 'Twitter',
@@ -114,7 +129,6 @@ const Contact = () => {
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-400',
     },
     {
       name: 'LinkedIn',
@@ -124,7 +138,6 @@ const Contact = () => {
         </svg>
       ),
       href: '#',
-      color: 'hover:text-blue-700',
     },
     {
       name: 'Instagram',
@@ -134,8 +147,14 @@ const Contact = () => {
         </svg>
       ),
       href: '#',
-      color: 'hover:text-pink-600',
     },
+  ];
+
+  const formFields = [
+    { id: 'name', label: t('contact.form.name'), type: 'text', required: true, placeholder: 'أدخل اسمك الكامل', half: true },
+    { id: 'email', label: t('contact.form.email'), type: 'email', required: true, placeholder: 'example@domain.com', half: true },
+    { id: 'phone', label: t('contact.form.phone'), type: 'tel', required: false, placeholder: '+963 XXX XXX XXX', half: true },
+    { id: 'subject', label: t('contact.form.subject'), type: 'text', required: true, placeholder: 'موضوع الرسالة', half: true },
   ];
 
   return (
@@ -146,135 +165,135 @@ const Contact = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
-        <div className="container-custom">
+      <section className="relative py-24 md:py-32 overflow-hidden dark:bg-[#0a0e1a]">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/5 via-white to-brand-purple/5 dark:from-brand-cyan/5 dark:via-[#0a0e1a] dark:to-brand-purple/5"></div>
+        <div className="absolute inset-0 grid-bg"></div>
+
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-[15%] w-64 h-64 bg-brand-cyan/10 dark:bg-brand-cyan/5 rounded-full blur-3xl blob animate-float"></div>
+          <div className="absolute bottom-1/4 right-[15%] w-72 h-72 bg-brand-purple/10 dark:bg-brand-purple/5 rounded-full blur-3xl blob animate-float-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-brand-blue/5 rounded-full blur-3xl animate-pulse-glow"></div>
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            <motion.div variants={fadeInUp} className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 dark:bg-brand-cyan/10 border border-brand-blue/20 dark:border-brand-cyan/20 text-brand-blue dark:text-brand-cyan text-sm font-medium">
+                <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                {t('contact.title')}
+              </span>
+            </motion.div>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 gradient-text-animate"
+            >
               {t('contact.title')}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            >
               {t('contact.subtitle')}
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="section-padding">
+      <section ref={cardsRef} className="section-padding dark:bg-[#0a0e1a] section-dark-mesh relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <motion.div
+            initial="hidden"
+            animate={cardsInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          >
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card p-6 text-center hover-lift"
+                variants={fadeInUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group"
               >
-                <div className={`w-12 h-12 ${info.color} mx-auto mb-4 flex items-center justify-center`}>
-                  {info.icon}
+                <div className="card p-6 text-center hover-glow h-full transition-all duration-500 dark:border-[#1e293b] dark:hover:border-brand-cyan/20">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-[0.02] dark:group-hover:opacity-[0.04] transition-opacity duration-500 rounded-2xl`}></div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-14 h-14 bg-gradient-to-br ${info.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg`}
+                  >
+                    {info.icon}
+                  </motion.div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                    {info.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm whitespace-pre-line leading-relaxed">
+                    {info.value}
+                  </p>
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  {info.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm whitespace-pre-line">
-                  {info.value}
-                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Form & Map */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
-        <div className="container-custom">
+      <section ref={formRef} className="section-padding dark:bg-[#0a0e1a] relative">
+        <div className="absolute inset-0 grid-bg"></div>
+
+        <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial="hidden"
+              animate={formInView ? "visible" : "hidden"}
+              variants={staggerContainer}
             >
-              <div className="card p-8">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <motion.div
+                variants={fadeInUp}
+                className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-gray-200/50 dark:border-[#1e293b]/50 hover-glow"
+              >
+                <h2 className="text-2xl font-bold mb-8 gradient-text">
                   أرسل لنا رسالة
                 </h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
+
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {t('contact.form.name')} *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="form-input"
-                        placeholder="أدخل اسمك الكامل"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {t('contact.form.email')} *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="form-input"
-                        placeholder="example@domain.com"
-                      />
-                    </div>
+                    {formFields.map((field, idx) => (
+                      <motion.div
+                        key={field.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={formInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5, delay: 0.2 + idx * 0.08 }}
+                      >
+                        <label htmlFor={field.id} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {field.label} {field.required && '*'}
+                        </label>
+                        <input
+                          type={field.type}
+                          id={field.id}
+                          name={field.id}
+                          value={formData[field.id]}
+                          onChange={handleChange}
+                          required={field.required}
+                          className="form-input"
+                          placeholder={field.placeholder}
+                        />
+                      </motion.div>
+                    ))}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {t('contact.form.phone')}
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="form-input"
-                        placeholder="+963 XXX XXX XXX"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {t('contact.form.subject')} *
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="form-input"
-                        placeholder="موضوع الرسالة"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={formInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.55 }}
+                  >
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       {t('contact.form.message')} *
                     </label>
@@ -288,54 +307,75 @@ const Contact = () => {
                       className="form-textarea"
                       placeholder="اكتب رسالتك هنا..."
                     />
-                  </div>
+                  </motion.div>
 
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full btn-gradient text-white py-3 px-6 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={formInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.65 }}
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2 rtl:ml-2 rtl:mr-0"></div>
-                        {t('contact.form.sending')}
-                      </>
-                    ) : (
-                      t('contact.form.send')
-                    )}
-                  </motion.button>
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full btn-gradient text-white py-3.5 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300"
+                    >
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2 rtl:ml-2 rtl:mr-0"></div>
+                            {t('contact.form.sending')}
+                          </>
+                        ) : (
+                          t('contact.form.send')
+                        )}
+                      </span>
+                    </motion.button>
+                  </motion.div>
                 </form>
-              </div>
+              </motion.div>
             </motion.div>
 
-            {/* Map & Additional Info */}
+            {/* Map & Social */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial="hidden"
+              animate={formInView ? "visible" : "hidden"}
+              variants={staggerContainer}
               className="space-y-8"
             >
               {/* Map Placeholder */}
-              <div className="card p-8">
+              <motion.div
+                variants={fadeInUp}
+                className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-[#1e293b]/50 hover-glow"
+              >
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   موقعنا
                 </h3>
-                <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-gray-600 dark:text-gray-400">خريطة الموقع</p>
+                <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-[#0a0e1a] dark:to-[#111827] rounded-2xl flex items-center justify-center relative overflow-hidden border border-gray-200/50 dark:border-[#1e293b]/50">
+                  <div className="absolute inset-0 grid-bg opacity-50"></div>
+                  <div className="relative text-center">
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="text-5xl mb-2"
+                    >
+                      📍
+                    </motion.div>
+                    <p className="text-gray-600 dark:text-gray-400 font-medium">خريطة الموقع</p>
                     <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
                       دمشق، سوريا - شارع الثورة
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Social Links */}
-              <div className="card p-8">
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <motion.div
+                variants={fadeInUp}
+                className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-[#1e293b]/50 hover-glow"
+              >
+                <h3 className="text-xl font-bold mb-5 text-gray-900 dark:text-white">
                   تابعنا على
                 </h3>
                 <div className="flex space-x-4 rtl:space-x-reverse">
@@ -345,44 +385,55 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.15, y: -3 }}
                       whileTap={{ scale: 0.9 }}
-                      className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 ${social.color} transition-colors duration-300`}
+                      className="w-12 h-12 bg-gray-100 dark:bg-[#1a2332] rounded-xl flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-brand-cyan hover:bg-brand-cyan/10 dark:hover:bg-brand-cyan/10 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.15)]"
                     >
                       {social.icon}
                     </motion.a>
                   ))}
                 </div>
-                
-                <div className="mt-6 p-4 bg-brand-gradient/10 rounded-lg">
+
+                <div className="mt-6 p-4 bg-brand-blue/5 dark:bg-brand-cyan/5 rounded-xl border border-brand-blue/10 dark:border-brand-cyan/10">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    💡 <strong>نصيحة:</strong> يمكنك أيضاً التواصل معنا مباشرة عبر وسائل التواصل الاجتماعي للحصول على رد سريع.
+                    💡 <strong className="text-gray-900 dark:text-white">نصيحة:</strong> يمكنك أيضاً التواصل معنا مباشرة عبر وسائل التواصل الاجتماعي للحصول على رد سريع.
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding">
+      <section ref={faqRef} className="section-padding dark:bg-[#0a0e1a] section-dark-mesh relative">
         <div className="container-custom">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            initial="hidden"
+            animate={faqInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="text-center mb-14"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-5xl font-bold mb-4 gradient-text-animate"
+            >
               الأسئلة الشائعة
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            >
               إجابات على الأسئلة الأكثر شيوعاً
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            initial="hidden"
+            animate={faqInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
             {[
               {
                 question: 'كم يستغرق تطوير موقع ويب؟',
@@ -403,20 +454,21 @@ const Contact = () => {
             ].map((faq, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card p-6"
+                variants={fadeInUp}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="group"
               >
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {faq.answer}
-                </p>
+                <div className="card p-6 hover-glow h-full transition-all duration-500 dark:border-[#1e293b] dark:hover:border-brand-cyan/20">
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-brand-blue dark:group-hover:text-brand-cyan transition-colors duration-300">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                    {faq.answer}
+                  </p>
+                </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

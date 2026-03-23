@@ -95,7 +95,7 @@ const Admin = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <Helmet>
-          <title>{t('admin.title')} - Shift Start</title>
+          <title>{t('admin.title')} - Version AI</title>
         </Helmet>
         <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
           <div className="text-center">
@@ -117,8 +117,8 @@ const Admin = () => {
                 required
                 value={loginForm.email}
                 onChange={(e) => setLoginForm(prev => ({ ...prev, email: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-red dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder="admin@shiftstart.sy"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                placeholder="admin@versionai.dev"
               />
             </div>
             <div>
@@ -130,7 +130,7 @@ const Admin = () => {
                 required
                 value={loginForm.password}
                 onChange={(e) => setLoginForm(prev => ({ ...prev, password: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-red dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="••••••••"
               />
             </div>
@@ -154,20 +154,20 @@ const Admin = () => {
   return (
     <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>{t('admin.title')} - Shift Start</title>
+        <title>{t('admin.title')} - Version AI</title>
       </Helmet>
       {/* Sidebar */}
       <aside className="w-64 bg-white dark:bg-gray-800 shadow-lg flex flex-col justify-between">
         <div>
           <div className="flex flex-col items-center py-8">
             <img src="/images/logo.png" alt="logo" className="w-20 mb-4" />
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Shift Start</h1>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Version AI</h1>
           </div>
           <nav className="flex flex-col gap-2 px-4">
-            <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'dashboard' ? 'bg-brand-red text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.dashboard')}</button>
-            <button onClick={() => setActiveTab('team')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'team' ? 'bg-brand-red text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.team')}</button>
-            <button onClick={() => setActiveTab('projects')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'projects' ? 'bg-brand-red text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.projects')}</button>
-            <button onClick={() => setActiveTab('contacts')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'contacts' ? 'bg-brand-red text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.contacts')}</button>
+            <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'dashboard' ? 'bg-brand-blue text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.dashboard')}</button>
+            <button onClick={() => setActiveTab('team')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'team' ? 'bg-brand-blue text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.team')}</button>
+            <button onClick={() => setActiveTab('projects')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'projects' ? 'bg-brand-blue text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.projects')}</button>
+            <button onClick={() => setActiveTab('contacts')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${activeTab === 'contacts' ? 'bg-brand-blue text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>{t('admin.contacts')}</button>
           </nav>
         </div>
         <div className="flex flex-col items-center gap-2 py-4">

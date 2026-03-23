@@ -90,7 +90,7 @@ app.get('/health', (req, res) => {
 app.get('/api', (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Shift Start API is running',
+    message: 'Version AI API is running',
     version: '1.0.0',
     endpoints: {
       auth: '/api/auth',
@@ -98,7 +98,7 @@ app.get('/api', (req, res) => {
       projects: '/api/projects',
       contact: '/api/contact'
     },
-    documentation: 'https://api.shiftstart.sy/docs'
+    documentation: 'https://api.versionai.dev/docs'
   });
 });
 
@@ -142,4 +142,4 @@ process.on('SIGTERM', () => {
   });
 });
 
-module.exports = app;
+export default app;
