@@ -49,13 +49,13 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">S</span>
+            <div className="w-10 h-10 flex items-center justify-center">
+              <img src="/logo.svg" alt="Version AI" className="w-10 h-10" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold gradient-text">Shift Start</h1>
+              <h1 className="text-xl font-bold gradient-text">Version AI</h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {language === 'ar' ? 'نقطة تحول' : 'نقطة تحول'}
+                {language === 'ar' ? 'تطوير برمجي احترافي' : 'Professional Software Dev'}
               </p>
             </div>
           </Link>
@@ -67,7 +67,7 @@ const Header = () => {
                 key={item.key}
                 to={item.path}
                 className={`nav-link ${
-                  location.pathname === item.path ? 'active text-brand-red' : ''
+                  location.pathname === item.path ? 'active text-brand-blue' : ''
                 }`}
               >
                 {t(`nav.${item.key}`)}
@@ -149,7 +149,7 @@ const Header = () => {
                 to={item.path}
                 onClick={() => toggleSidebar()}
                 className={`block px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
-                  location.pathname === item.path ? 'bg-brand-red/10 text-brand-red' : ''
+                  location.pathname === item.path ? 'bg-brand-blue/10 text-brand-blue' : ''
                 }`}
               >
                 {t(`nav.${item.key}`)}

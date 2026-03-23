@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="eagleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2979FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C4DFF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="eagleGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#2979FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#651FFF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#7C4DFF;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  <!-- Left wing -->
+  <path d="M256 290 L60 120 L120 200 L80 160 L160 240 L100 190 L200 280 L256 310Z" fill="url(#eagleGrad)" opacity="0.9"/>
+  <path d="M256 290 L160 240 L130 180 L190 250 L256 310Z" fill="url(#eagleGrad2)"/>
+  <!-- Right wing -->
+  <path d="M256 290 L452 120 L392 200 L432 160 L352 240 L412 190 L312 280 L256 310Z" fill="url(#eagleGrad)" opacity="0.9"/>
+  <path d="M256 290 L352 240 L382 180 L322 250 L256 310Z" fill="url(#eagleGrad2)"/>
+  <!-- V shape / eagle body -->
+  <path d="M256 420 L180 260 L220 300 L256 380 L292 300 L332 260Z" fill="url(#eagleGrad2)"/>
+  <!-- Head/beak -->
+  <path d="M256 250 L236 290 L256 320 L276 290Z" fill="url(#shineGrad)"/>
+  <!-- Inner wing detail left -->
+  <path d="M200 220 L140 160 L180 210 L220 260 L200 240Z" fill="#00E5FF" opacity="0.4"/>
+  <!-- Inner wing detail right -->
+  <path d="M312 220 L372 160 L332 210 L292 260 L312 240Z" fill="#00E5FF" opacity="0.4"/>
+  <!-- Central highlight -->
+  <path d="M256 270 L246 290 L256 310 L266 290Z" fill="#FFFFFF" opacity="0.6"/>
+</svg>

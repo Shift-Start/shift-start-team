@@ -72,13 +72,13 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4">
-              <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img src="/logo.svg" alt="Version AI" className="w-10 h-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold gradient-text">Shift Start</h3>
+                <h3 className="text-xl font-bold gradient-text">Version AI</h3>
                 <p className="text-sm text-gray-400">
-                  {language === 'ar' ? 'نقطة تحول' : 'نقطة تحول'}
+                  {language === 'ar' ? 'تطوير برمجي احترافي' : 'Professional Software Dev'}
                 </p>
               </div>
             </div>
@@ -90,7 +90,7 @@ const Footer = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 bg-gray-800 hover:bg-brand-red rounded-lg flex items-center justify-center transition-colors duration-300"
+                  className="w-10 h-10 bg-gray-800 hover:bg-brand-blue rounded-lg flex items-center justify-center transition-colors duration-300"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -135,7 +135,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">{t('footer.contact')}</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <div className="w-5 h-5 text-brand-red">
+                <div className="w-5 h-5 text-brand-cyan">
                   <svg fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
@@ -145,7 +145,7 @@ const Footer = () => {
                 </span>
               </div>
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <div className="w-5 h-5 text-brand-red">
+                <div className="w-5 h-5 text-brand-cyan">
                   <svg fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
@@ -155,14 +155,14 @@ const Footer = () => {
                 </span>
               </div>
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <div className="w-5 h-5 text-brand-red">
+                <div className="w-5 h-5 text-brand-cyan">
                   <svg fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </div>
                 <span className="text-gray-400 text-sm">
-                  info@shiftstart.sy
+                  info@versionai.dev
                 </span>
               </div>
             </div>
@@ -173,7 +173,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © {currentYear} Shift Start. {t('footer.rights')}.
+              © {currentYear} Version AI. {t('footer.rights')}.
             </p>
             <div className="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
               <Link

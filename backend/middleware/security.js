@@ -112,8 +112,8 @@ export const corsOptions = {
       process.env.FRONTEND_URL,
       'http://localhost:3000',
       'http://localhost:3001',
-      'https://shiftstart.sy',
-      'https://www.shiftstart.sy'
+      'https://versionai.dev',
+      'https://www.versionai.dev'
     ];
     
     // Allow requests with no origin (mobile apps, etc.)
