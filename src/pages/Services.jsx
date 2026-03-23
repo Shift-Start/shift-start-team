@@ -9,7 +9,43 @@ const Services = () => {
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const timelineStagger = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.18, delayChildren: 0.2 },
+    },
+  };
+
+  const timelineItem = {
+    hidden: { opacity: 0, x: -30, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.6, type: 'spring', stiffness: 100, damping: 15 },
+    },
   };
 
   const services = [
@@ -115,6 +151,11 @@ const Services = () => {
     },
   ];
 
+  const technologies = [
+    'React', 'Vue.js', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL',
+    'Docker', 'AWS', 'Figma', 'TailwindCSS', 'TypeScript', 'Next.js',
+  ];
+
   return (
     <>
       <Helmet>
@@ -123,179 +164,278 @@ const Services = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
-        <div className="container-custom">
+      <section className="relative py-24 md:py-32 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:bg-[#0a0e1a] dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5 overflow-hidden">
+        {/* Grid overlay */}
+        <div className="absolute inset-0 grid-bg"></div>
+
+        {/* Animated blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-10 left-1/4 w-72 h-72 bg-brand-cyan/10 dark:bg-brand-cyan/5 rounded-full blur-3xl blob animate-float"></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-brand-purple/10 dark:bg-brand-purple/5 rounded-full blur-3xl blob animate-float-slow" style={{ animationDelay: '3s' }}></div>
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
-              {t('services.title')}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <motion.span
+              variants={fadeInUp}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 dark:bg-brand-cyan/10 border border-brand-blue/20 dark:border-brand-cyan/20 text-brand-blue dark:text-brand-cyan text-sm font-medium mb-6"
+            >
+              <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
               {t('services.subtitle')}
-            </p>
+            </motion.span>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 gradient-text-animate"
+            >
+              {t('services.title')}
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            >
+              {t('services.subtitle')}
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="section-padding">
+      <section className="section-padding dark:bg-[#0a0e1a] section-dark-mesh relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {services.map((service) => (
               <motion.div
                 key={service.key}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                variants={cardVariant}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
                 className="group"
               >
-                <div className="card p-8 h-full hover-lift relative overflow-hidden">
-                  {/* Background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                  
+                <div className="card p-8 h-full hover-glow relative overflow-hidden neon-border">
+                  {/* Background gradient on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-[0.04] dark:group-hover:opacity-[0.08] transition-opacity duration-500`}></div>
+
                   <div className="relative z-10">
-                    <div className="w-20 h-20 bg-brand-gradient rounded-2xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
+                    <motion.div
+                      whileHover={{ rotate: 3, scale: 1.05 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                      className="w-20 h-20 bg-brand-gradient rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg group-hover:shadow-brand-cyan/20"
+                    >
                       {service.icon}
-                    </div>
-                    
+                    </motion.div>
+
                     <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
                       {t(`services.${service.key}.title`)}
                     </h3>
-                    
+
                     <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                       {t(`services.${service.key}.description`)}
                     </p>
-                    
-                    <div className="space-y-2">
+
+                    <div className="space-y-3">
                       {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                          <div className="w-2 h-2 bg-brand-blue rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.05, duration: 0.3 }}
+                          className="flex items-center text-sm text-gray-500 dark:text-gray-400"
+                        >
+                          <div className="w-2 h-2 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-full mr-3 rtl:ml-3 rtl:mr-0 flex-shrink-0"></div>
                           {feature}
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
-        <div className="container-custom">
+      {/* Process Section with Timeline */}
+      <section className="section-padding bg-gray-50 dark:bg-[#0a0e1a] section-dark-mesh relative overflow-hidden">
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 grid-bg opacity-50"></div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+            className="text-center mb-20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <motion.span
+              variants={fadeInUp}
+              className="text-brand-blue dark:text-brand-cyan text-sm font-semibold uppercase tracking-wider"
+            >
+              منهجيتنا
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mt-4 gradient-text">
               كيف نعمل
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4">
               نتبع منهجية مدروسة لضمان نجاح مشروعك
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Timeline layout */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={timelineStagger}
+            className="relative max-w-4xl mx-auto"
+          >
+            {/* Vertical timeline connector */}
+            <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-cyan via-brand-blue to-brand-purple opacity-30 dark:opacity-50"></div>
+
             {process.map((step, index) => (
               <motion.div
                 key={step.step}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative"
+                variants={timelineItem}
+                className={`relative flex items-start gap-8 mb-12 last:mb-0 ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
               >
-                <div className="card p-6 text-center hover-lift h-full">
-                  <div className="text-4xl mb-4">{step.icon}</div>
-                  <div className="text-sm font-bold text-brand-blue mb-2">{step.step}</div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {step.description}
-                  </p>
+                {/* Timeline dot */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 z-20">
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center text-white text-sm font-bold shadow-lg"
+                    style={{ boxShadow: '0 0 20px rgba(0, 229, 255, 0.3)' }}
+                  >
+                    {step.step}
+                  </motion.div>
                 </div>
-                
-                {/* Connector line */}
-                {index < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-brand-gradient"></div>
-                )}
+
+                {/* Content card */}
+                <div className={`ml-20 md:ml-0 md:w-[calc(50%-2.5rem)] ${
+                  index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
+                }`}>
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="card p-6 hover-glow relative overflow-hidden group"
+                  >
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="flex items-center gap-4 mb-3">
+                      <span className="text-3xl">{step.icon}</span>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </motion.div>
+                </div>
+
+                {/* Spacer for the other side */}
+                <div className="hidden md:block md:w-[calc(50%-2.5rem)]"></div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Technologies Section */}
-      <section className="section-padding">
+      <section className="section-padding dark:bg-[#0a0e1a] section-dark-mesh relative">
         <div className="container-custom">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+            <motion.span
+              variants={fadeInUp}
+              className="text-brand-blue dark:text-brand-cyan text-sm font-semibold uppercase tracking-wider"
+            >
+              أدواتنا
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mt-4 gradient-text">
               التقنيات التي نستخدمها
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4">
               نعمل بأحدث التقنيات والأدوات لضمان جودة عالية
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {[
-              'React', 'Vue.js', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL',
-              'Docker', 'AWS', 'Figma', 'TailwindCSS', 'TypeScript', 'Next.js'
-            ].map((tech, index) => (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          >
+            {technologies.map((tech) => (
               <motion.div
                 key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="card p-4 text-center hover-lift"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                whileHover={{ scale: 1.08, y: -4 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="tech-badge justify-center py-3 px-4 cursor-default"
               >
-                <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {tech}
-                </div>
+                <span className="font-medium">{tech}</span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="section-padding bg-brand-gradient text-white">
-        <div className="container-custom">
+      {/* Call to Action - Glassmorphism */}
+      <section className="section-padding dark:bg-[#0a0e1a] relative overflow-hidden">
+        {/* Background accents */}
+        <div className="absolute inset-0 grid-bg"></div>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-brand-cyan/10 dark:bg-brand-cyan/5 rounded-full blur-3xl blob"></div>
+          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-80 h-80 bg-brand-purple/10 dark:bg-brand-purple/5 rounded-full blur-3xl blob" style={{ animationDelay: '4s' }}></div>
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center glass dark:glass-dark rounded-3xl p-12 md:p-16 hover-glow relative overflow-hidden"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            {/* Gradient top border */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple"></div>
+
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text-animate">
               مستعد لبدء مشروعك؟
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <p className="text-xl mb-10 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               تواصل معنا اليوم واحصل على استشارة مجانية حول مشروعك
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white text-brand-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+                className="btn-gradient text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-2xl transition-all duration-500 inline-block relative overflow-hidden"
               >
-                ابدأ مشروعك الآن
+                <span className="relative z-10">ابدأ مشروعك الآن</span>
               </Link>
               <Link
                 to="/projects"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-blue transition-all duration-300 inline-block"
+                className="px-10 py-4 rounded-xl font-semibold text-lg border-2 border-brand-blue/30 dark:border-brand-cyan/30 text-brand-blue dark:text-brand-cyan hover:bg-brand-blue/5 dark:hover:bg-brand-cyan/5 hover:border-brand-blue dark:hover:border-brand-cyan transition-all duration-500 inline-block"
               >
                 شاهد أعمالنا
               </Link>
