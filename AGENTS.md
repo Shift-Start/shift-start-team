@@ -4,7 +4,7 @@
 
 ### Project overview
 
-Shift Start is a bilingual (Arabic/English) portfolio website for a web development agency. It has two services:
+Version AI is a bilingual (Arabic/English) portfolio website for a web development agency. It has two services:
 
 | Service | Port | Command | Description |
 |---------|------|---------|-------------|
@@ -34,7 +34,7 @@ Shift Start is a bilingual (Arabic/English) portfolio website for a web developm
 
 ### Admin credentials (from seed data)
 
-- Email: `admin@shiftstart.sy`
+- Email: `admin@versionai.dev`
 - Password: `Admin123!@#`
 - Admin panel URL: `http://localhost:3000/admin`
 

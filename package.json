@@ -1,7 +1,7 @@
 {
-  "name": "shift-start",
+  "name": "version-ai",
   "version": "1.0.0",
-  "description": "موقع ويب لفريق تطوير Shift Start - نقطة تحول",
+  "description": "موقع ويب لفريق تطوير Version AI",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",

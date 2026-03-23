@@ -1,7 +1,7 @@
 {
-  "name": "shift-start-backend",
+  "name": "version-ai-backend",
   "version": "1.0.0",
-  "description": "Backend API for Shift Start website",
+  "description": "Backend API for Version AI website",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -15,9 +15,9 @@
     "express",
     "mongodb",
     "api",
-    "shift-start"
+    "version-ai"
   ],
-  "author": "Shift Start Team",
+  "author": "Version AI Team",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.10.0",
