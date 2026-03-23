@@ -123,7 +123,7 @@ const ProjectsAdmin = () => {
   return (
     <div>
       <h3 className="text-xl font-bold mb-4">{t('admin.projects_management')}</h3>
-      <button className="mb-4 px-4 py-2 bg-brand-red text-white rounded" onClick={openAddModal}>{t('admin.add_project')}</button>
+      <button className="mb-4 px-4 py-2 bg-brand-blue text-white rounded" onClick={openAddModal}>{t('admin.add_project')}</button>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white dark:bg-gray-800 rounded shadow">
           <thead>
@@ -172,19 +172,19 @@ const ProjectsAdmin = () => {
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.title_ar')}</label>
-            <input type="text" name="title" data-lang="ar" value={form.title.ar} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="title" data-lang="ar" value={form.title.ar} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.title_en')}</label>
-            <input type="text" name="title" data-lang="en" value={form.title.en} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="title" data-lang="en" value={form.title.en} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.category')}</label>
-            <input type="text" name="category" value={form.category} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="category" value={form.category} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.status')}</label>
-            <select name="status" value={form.status} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required>
+            <select name="status" value={form.status} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required>
               <option value="">{t('admin.choose_status')}</option>
               <option value="active">{t('admin.active')}</option>
               <option value="inactive">{t('admin.inactive')}</option>
@@ -192,7 +192,7 @@ const ProjectsAdmin = () => {
           </div>
           <div className="flex justify-end gap-2">
             <button type="button" onClick={closeModal} className="px-4 py-2 bg-gray-300 rounded flex items-center"><i className="fas fa-times mr-2"></i>{t('admin.cancel')}</button>
-            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-red text-white rounded flex items-center">
+            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-blue text-white rounded flex items-center">
               {formLoading ? <LoadingSpinner size={20} /> : <i className="fas fa-save mr-2"></i>}
               {formLoading ? t('loading') : t('admin.save')}
             </button>

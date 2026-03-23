@@ -125,7 +125,7 @@ const ContactAdmin = () => {
           </div>
           <div className="flex justify-end">
             <button type="button" onClick={closeModal} className="mr-2 px-4 py-2 bg-gray-300 rounded">{t('admin.cancel')}</button>
-            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-red text-white rounded">
+            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-blue text-white rounded">
               {formLoading ? t('loading') : t('admin.save')}
             </button>
           </div>

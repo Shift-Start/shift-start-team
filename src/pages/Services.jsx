@@ -118,12 +118,12 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>خدماتنا - Shift Start</title>
-        <meta name="description" content="اكتشف مجموعة شاملة من خدمات التطوير والتصميم التي نقدمها في Shift Start" />
+        <title>خدماتنا - Version AI</title>
+        <meta name="description" content="اكتشف مجموعة شاملة من خدمات التطوير والتصميم التي نقدمها في Version AI" />
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="relative py-20 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -173,7 +173,7 @@ const Services = () => {
                     <div className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                          <div className="w-2 h-2 bg-brand-red rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
+                          <div className="w-2 h-2 bg-brand-blue rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
                           {feature}
                         </div>
                       ))}
@@ -214,7 +214,7 @@ const Services = () => {
               >
                 <div className="card p-6 text-center hover-lift h-full">
                   <div className="text-4xl mb-4">{step.icon}</div>
-                  <div className="text-sm font-bold text-brand-red mb-2">{step.step}</div>
+                  <div className="text-sm font-bold text-brand-blue mb-2">{step.step}</div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
                     {step.title}
                   </h3>
@@ -289,13 +289,13 @@ const Services = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white text-brand-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+                className="bg-white text-brand-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 inline-block"
               >
                 ابدأ مشروعك الآن
               </Link>
               <Link
                 to="/projects"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-red transition-all duration-300 inline-block"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-blue transition-all duration-300 inline-block"
               >
                 شاهد أعمالنا
               </Link>

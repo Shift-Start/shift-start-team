@@ -61,7 +61,7 @@ const Contact = () => {
       ),
       title: t('contact.info.address'),
       value: 'دمشق، سوريا\nشارع الثورة - المالكي',
-      color: 'text-brand-red',
+      color: 'text-brand-blue',
     },
     {
       icon: (
@@ -71,7 +71,7 @@ const Contact = () => {
       ),
       title: t('contact.info.phone'),
       value: '+963 XXX XXX XXX\n+963 YYY YYY YYY',
-      color: 'text-brand-pink',
+      color: 'text-brand-cyan',
     },
     {
       icon: (
@@ -80,7 +80,7 @@ const Contact = () => {
         </svg>
       ),
       title: t('contact.info.email'),
-      value: 'info@shiftstart.sy\nsupport@shiftstart.sy',
+      value: 'info@versionai.dev\nsupport@versionai.dev',
       color: 'text-brand-purple',
     },
     {
@@ -91,7 +91,7 @@ const Contact = () => {
       ),
       title: t('contact.info.hours'),
       value: 'السبت - الخميس\n9:00 ص - 6:00 م',
-      color: 'text-brand-orange',
+      color: 'text-brand-indigo',
     },
   ];
 
@@ -146,7 +146,7 @@ const Contact = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="relative py-20 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}

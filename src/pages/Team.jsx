@@ -176,7 +176,7 @@ const Team = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="relative py-20 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -257,7 +257,7 @@ const Team = () => {
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-gray-100 dark:bg-gray-700 hover:bg-brand-red dark:hover:bg-brand-red text-gray-600 dark:text-gray-400 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                          className="w-10 h-10 bg-gray-100 dark:bg-gray-700 hover:bg-brand-blue dark:hover:bg-brand-blue text-gray-600 dark:text-gray-400 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
                         >
                           {getSocialIcon(platform)}
                         </a>
@@ -306,7 +306,7 @@ const Team = () => {
             </div>
 
             <motion.a
-              href="mailto:careers@shiftstart.sy"
+              href="mailto:careers@versionai.dev"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg inline-block"

@@ -70,7 +70,7 @@ const About = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="relative py-20 bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -121,7 +121,7 @@ const About = () => {
                   <div className="text-xl">سنوات من الخبرة</div>
                 </div>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-orange/20 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-indigo/20 rounded-full blur-xl"></div>
               <div className="absolute -top-8 -left-8 w-24 h-24 bg-brand-purple/20 rounded-full blur-xl"></div>
             </motion.div>
           </div>

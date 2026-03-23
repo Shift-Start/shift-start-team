@@ -10,11 +10,11 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>404 - الصفحة غير موجودة | Shift Start</title>
+        <title>404 - الصفحة غير موجودة | Version AI</title>
         <meta name="description" content="الصفحة التي تبحث عنها غير موجودة. العودة إلى الصفحة الرئيسية" />
       </Helmet>
 
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-red/10 via-brand-pink/10 to-brand-purple/10 dark:from-brand-red/5 dark:via-brand-pink/5 dark:to-brand-purple/5">
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-blue/10 via-brand-cyan/10 to-brand-purple/10 dark:from-brand-blue/5 dark:via-brand-cyan/5 dark:to-brand-purple/5">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -41,7 +41,7 @@ const NotFound = () => {
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2"
                 >
-                  <div className="w-16 h-16 bg-brand-red/20 rounded-full blur-xl"></div>
+                  <div className="w-16 h-16 bg-brand-blue/20 rounded-full blur-xl"></div>
                 </motion.div>
                 
                 <motion.div
@@ -49,7 +49,7 @@ const NotFound = () => {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   className="absolute top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/2"
                 >
-                  <div className="w-12 h-12 bg-brand-pink/20 rounded-full blur-xl"></div>
+                  <div className="w-12 h-12 bg-brand-cyan/20 rounded-full blur-xl"></div>
                 </motion.div>
                 
                 <motion.div
@@ -94,7 +94,7 @@ const NotFound = () => {
               
               <button
                 onClick={() => window.history.back()}
-                className="px-8 py-4 rounded-lg font-semibold text-lg border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white transition-all duration-300"
+                className="px-8 py-4 rounded-lg font-semibold text-lg border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white transition-all duration-300"
               >
                 العودة للخلف
               </button>
@@ -157,7 +157,7 @@ const NotFound = () => {
               className="mt-8"
             >
               <p className="text-gray-500 dark:text-gray-500 text-sm">
-                إذا كنت تعتقد أن هذا خطأ، يرجى <Link to="/contact" className="text-brand-red hover:underline">التواصل معنا</Link>
+                إذا كنت تعتقد أن هذا خطأ، يرجى <Link to="/contact" className="text-brand-blue hover:underline">التواصل معنا</Link>
               </p>
             </motion.div>
           </motion.div>

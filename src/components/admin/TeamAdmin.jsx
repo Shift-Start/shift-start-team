@@ -125,7 +125,7 @@ const TeamAdmin = () => {
   return (
     <div>
       <h3 className="text-xl font-bold mb-4">{t('admin.team_management')}</h3>
-      <button className="mb-4 px-4 py-2 bg-brand-red text-white rounded" onClick={openAddModal}>{t('admin.add_member')}</button>
+      <button className="mb-4 px-4 py-2 bg-brand-blue text-white rounded" onClick={openAddModal}>{t('admin.add_member')}</button>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white dark:bg-gray-800 rounded shadow">
           <thead>
@@ -174,26 +174,26 @@ const TeamAdmin = () => {
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.name_ar')}</label>
-            <input type="text" name="name" data-lang="ar" value={form.name.ar} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="name" data-lang="ar" value={form.name.ar} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.name_en')}</label>
-            <input type="text" name="name" data-lang="en" value={form.name.en} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="name" data-lang="en" value={form.name.en} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.role')}</label>
-            <input type="text" name="role" value={form.role} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required />
+            <input type="text" name="role" value={form.role} onChange={handleFormChange} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required />
           </div>
           <div>
             <label className="block mb-1 font-semibold">{t('admin.status')}</label>
-            <select name="isActive" value={form.isActive ? 'active' : 'inactive'} onChange={e => handleFormChange({ target: { ...e.target, name: 'isActive', value: e.target.value === 'active' } })} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-red/30" required>
+            <select name="isActive" value={form.isActive ? 'active' : 'inactive'} onChange={e => handleFormChange({ target: { ...e.target, name: 'isActive', value: e.target.value === 'active' } })} className="w-full border rounded px-2 py-1 focus:ring focus:ring-brand-blue/30" required>
               <option value="active">{t('admin.active')}</option>
               <option value="inactive">{t('admin.inactive')}</option>
             </select>
           </div>
           <div className="flex justify-end gap-2">
             <button type="button" onClick={closeModal} className="px-4 py-2 bg-gray-300 rounded flex items-center"><i className="fas fa-times mr-2"></i>{t('admin.cancel')}</button>
-            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-red text-white rounded flex items-center">
+            <button type="submit" disabled={formLoading} className="px-4 py-2 bg-brand-blue text-white rounded flex items-center">
               {formLoading ? <LoadingSpinner size={20} /> : <i className="fas fa-save mr-2"></i>}
               {formLoading ? t('loading') : t('admin.save')}
             </button>
