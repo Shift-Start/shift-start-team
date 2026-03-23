@@ -66,7 +66,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white">
+    <footer className="bg-gray-900 dark:bg-[#060a14] text-white relative overflow-hidden">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12">
           {/* Company Info */}
